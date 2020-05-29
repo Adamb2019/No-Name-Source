@@ -1,10 +1,12 @@
 const net = require('net')
 const parseString = require('xml2js').parseString
-const database = require('../database/database.js')
+const database = require('../../database/database.js')
 const bcrypt = require('bcrypt')
+const penguin = require('../../penguin.js')
 const worlds = require('../../../connections/worlds.json')
 
 const server = net.createServer(function(connection) {
+    let client = new penguin(connection)
     console.log('Client connected to login server')
 
     connection.on('end', function() {
