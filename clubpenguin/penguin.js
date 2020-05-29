@@ -1,0 +1,5 @@
+class penguin {
+    penguin(socket) {
+
+    }
+}
