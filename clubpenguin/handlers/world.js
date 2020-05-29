@@ -1,4 +1,5 @@
 const net = require('net')
+const worlds = require('../../connections/worlds.json')
 
 const server = net.createServer(function(connection) {
     console.log('Client connected to world server')
@@ -8,6 +9,6 @@ const server = net.createServer(function(connection) {
     })
 });
 
-server.listen(9875, function() {
+server.listen(worlds.world.port, function() {
     console.log('world server listening on port 9875')
 });
