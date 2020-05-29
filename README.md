@@ -9,4 +9,4 @@ npm install mysql
 
 npm install net
 
-npm install xmljs
+npm install xml2js
