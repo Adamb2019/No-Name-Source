@@ -4,6 +4,7 @@ const database = require('../../database/database.js')
 const bcrypt = require('bcrypt')
 const penguin = require('../../penguin.js')
 const worlds = require('../../../connections/worlds.json')
+const errors = require('../../../connections/errors.json')
 
 const server = net.createServer(function(connection) {
     let client = new penguin(connection)
@@ -16,13 +17,13 @@ const server = net.createServer(function(connection) {
     connection.on('data', function(data) {
         let data1 = data.toString().split('\0')[0]
         if(policy(data1)) {
-            connection.write('<cross-domain-policy><allow-access-from domain="*.localhost" to-ports="*" /></cross-domain-policy>' + '\0')
+            client.send_xml('<cross-domain-policy><allow-access-from domain="*.localhost" to-ports="*" /></cross-domain-policy>')
         } else {
             if(verChk(data1)) {
-                connection.write('<msg t="sys"><body action="apiOK" r="0"></body></msg>' + '\0')
+                client.send_xml('<msg t="sys"><body action="apiOK" r="0"></body></msg>')
             } else {
                 if(rndK(data1)) {
-                    connection.write('<msg t="sys"><body action="rndK" r="-1"><k>{0}</k></body></msg>' + '\0')
+                    client.send_xml('<msg t="sys"><body action="rndK" r="-1"><k>nodeJS</k></body></msg>')
                 } else {
                     login(data1)
                 }
@@ -53,12 +54,20 @@ const server = net.createServer(function(connection) {
         function login(data) {
             parseString(data, function (err, result) {
                 if(result) {
-                    let username = result.msg.body[0].login[0].nick[0]
+                    let username = result.msg.body[0].login[0].nick[0].toLowerCase()
                     let password = result.msg.body[0].login[0].pword[0]
 
-                    database.query(`SELECT * FROM penguins WHERE username = '${username}'`, function(err, results) {
+                    database.query(`SELECT * FROM penguins WHERE username = '${username}'`, async function(err, results) {
                         if(results.length < 1) {
-                            // connection.write('e', -1, 150)
+                            client.send_error(errors.USERNAME_NOT_FOUND)
+                        } else {
+                            let pass = results[0].Password
+                            let compare = await bcrypt.compare(password, pass)
+                            if(compare === false) {
+                                client.send_error(errors.INCORRECT_PASSWORD)
+                            } else {
+                                console.log('yea')
+                            }
                         }
                     })
                 }
