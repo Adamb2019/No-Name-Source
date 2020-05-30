@@ -65,8 +65,9 @@ const server = net.createServer(function(connection) {
                             let compare = await bcrypt.compare(password, pass)
                             if(compare === false) {
                                 client.send_error(errors.INCORRECT_PASSWORD)
+                                console.log(client.send_xt())
                             } else {
-                                console.log('yea')
+                                client.send_xt('l', -1)
                             }
                         }
                     })
