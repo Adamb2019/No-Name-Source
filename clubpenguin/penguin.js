@@ -14,7 +14,8 @@ class penguin {
   }
 
   send_xt() {
-
+    const args = Array.prototype.join.call(arguments, '%')
+    this.socket.write('%xt%' + args + '%' + '\0');
   }
 
   send_error(error) {
