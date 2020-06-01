@@ -10,11 +10,12 @@ let penguinsOnline = []
 const server = net.createServer(function(connection) {
     let client = new penguin(connection)
     penguinsOnline.push(connection)
-    console.log('Penguin connected to world server')
+    console.log(`Penguin connected to the world server || Their are currently ${penguinsOnline.length} penguin's online`)
 
     connection.on('end', function() {
-        penguinsOnline.splice(playersOnline.indexOf(connection), 1)
-        console.log('Penguin disconnected from world server')
+        penguinsOnline.splice(penguinsOnline.indexOf(connection), 1)
+        console.log(penguinsOnline.length)
+        console.log(`Penguin disconnected to the world server || Their are currently ${penguinsOnline.length} penguin's online`)
     })
 
     connection.on('data', function(data) {
@@ -37,14 +38,12 @@ server.listen(worlds.world.port, function() {
 
 function verChk(data) {
     if(data === "<msg t='sys'><body action='verChk' r='0'><ver v='153' /></body></msg>") {
-        console.log(`Received ${data}`)
         return true
     }
 }
 
 function rndK(data) {
     if(data === "<msg t='sys'><body action='rndK' r='-1'></body></msg>") {
-        console.log(`Received ${data}`)
         return true
     }
 }
