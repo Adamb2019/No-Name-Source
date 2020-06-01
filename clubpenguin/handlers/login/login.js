@@ -3,6 +3,8 @@ const parseString = require('xml2js').parseString
 const database = require('../../database/database.js')
 const bcrypt = require('bcrypt')
 const penguin = require('../../penguin.js')
+const crypto = require('../../crypto.js')
+const generateKey = require('../../crypto.js')
 const worlds = require('../../../connections/worlds.json')
 const errors = require('../../errors.js')
 
@@ -25,7 +27,7 @@ const server = net.createServer(function(connection) {
                 if(rndK(data1)) {
                     client.send_xml('<msg t="sys"><body action="rndK" r="-1"><k>nodeJS</k></body></msg>')
                 } else {
-                    login(data1)
+                    login(data1, client)
                 }
             }
         }
@@ -57,26 +59,36 @@ function rndK(data) {
     }
 }
 
-function login(data) {
+function login(data, client) {
     parseString(data, function (err, result) {
         if(result) {
+            let generate = new crypto()
             let username = result.msg.body[0].login[0].nick[0].toLowerCase()
             let password = result.msg.body[0].login[0].pword[0]
+            let randomKey = generate.randomkey()
 
             database.query(`SELECT * FROM penguins WHERE username = '${username}'`, async function(err, results) {
                 if(results.length < 1) {
+                    console.log(`${username} failed to login as username doesnt exist`)
                     client.send_error(USERNAME_NOT_FOUND)
                 } else {
                     let pass = results[0].Password
+                    let id = results[0].ID
                     let compare = await bcrypt.compare(password, pass)
                     if(compare === false) {
+                        console.log(`${username} failed to login as password doesnt match`)
                         client.send_error(INCORRECT_PASSWORD)
                     } else {
-                        client.send_xt('l', -1)
+                        database.query(`UPDATE penguins SET LoginKey = '${randomKey}' WHERE Username = '${username}'`)
+                        database.query(`SELECT * FROM penguins WHERE username = '${username}'`, async function(err, results1) {
+                            let loginKey = results1[0].LoginKey
+                            console.log(loginKey)
+                            console.log('Key updated')
+                            client.send_xt('l', -1, id, loginKey, '', '100,5')
+                        })
                     }
                 }
             })
         }
     })
 }
-
