@@ -5,13 +5,15 @@ const database = require('../../database/database.js')
 const errors = require('../../errors.js')
 const worlds = require('../../../connections/worlds.json')
 
-// cant connect to a world server needs fixing
+let playersOnline = []
 
 const server = net.createServer(function(connection) {
     let client = new penguin(connection)
+    playersOnline.push(connection)
     console.log('Penguin connected to world server')
 
     connection.on('end', function() {
+        playersOnline.splice(playersOnline.indexOf(connection), 1)
         console.log('Penguin disconnected from world server')
     })
 
@@ -35,14 +37,14 @@ server.listen(worlds.world.port, function() {
 
 function verChk(data) {
     if(data === "<msg t='sys'><body action='verChk' r='0'><ver v='153' /></body></msg>") {
-        console.log(`Recieved ${data}`)
+        console.log(`Received ${data}`)
         return true
     }
 }
 
 function rndK(data) {
     if(data === "<msg t='sys'><body action='rndK' r='-1'></body></msg>") {
-        console.log(`Recieved ${data}`)
+        console.log(`Received ${data}`)
         return true
     }
 }
@@ -53,8 +55,6 @@ function login(data, client) {
             let username = result.msg.body[0].login[0].nick[0].toLowerCase()
             let password = result.msg.body[0].login[0].pword[0]
             let key = password.substr(32)
-            console.log(key)
-            console.log(username)
             database.query(`SELECT * FROM penguins WHERE username = '${username}'`, async function(err, results) {
                 let loginKey = results[0].LoginKey
                 if(results[0].LoginKey === "") {
@@ -62,13 +62,13 @@ function login(data, client) {
                 } else {
                     if(key === loginKey) {
                         client.send_xt('l')
+                        client.send_xt('js', -1, 0, 1)
                         client.send_xt('gps', -1, '')
                         client.send_xt('lp', -1, client.playerString(results[0]))
                     } else {
-                        client.send_error(INCORRECT_PASSWORD )
+                        client.send_error(INCORRECT_PASSWORD)
                     }
                 }
-                console.log(data)
             })
         }
     })
