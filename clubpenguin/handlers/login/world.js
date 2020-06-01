@@ -5,15 +5,15 @@ const database = require('../../database/database.js')
 const errors = require('../../errors.js')
 const worlds = require('../../../connections/worlds.json')
 
-let playersOnline = []
+let penguinsOnline = []
 
 const server = net.createServer(function(connection) {
     let client = new penguin(connection)
-    playersOnline.push(connection)
+    penguinsOnline.push(connection)
     console.log('Penguin connected to world server')
 
     connection.on('end', function() {
-        playersOnline.splice(playersOnline.indexOf(connection), 1)
+        penguinsOnline.splice(playersOnline.indexOf(connection), 1)
         console.log('Penguin disconnected from world server')
     })
 
