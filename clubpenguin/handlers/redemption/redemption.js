@@ -63,7 +63,6 @@ function accessRedemption(data, client) {
                         client.disconnect()
                         console.log('empty')
                     } else {
-                        client.send_error('nigga')
                         client.send_xt('rjs')
                         console.log('worked')
                     }
