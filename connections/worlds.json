@@ -4,6 +4,12 @@
     },
 
     "world": {
-        "port": "9875"
+        "port": "9875",
+        "moderator": true
+    },
+
+    "redemption": {
+        "port": "9000"
     }
+
 }
