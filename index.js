@@ -1,6 +1,7 @@
 const login = require('./clubpenguin/handlers/login/login.js')
 const world = require('./clubpenguin/handlers/login/world.js')
 const database = require('./clubpenguin/database/database.js')
+const redemption = require('./clubpenguin/handlers/redemption/redemption.js')
 const databaseInfo = require('./connections/database.json')
 const worlds = require('./connections/worlds.json')
 
@@ -14,13 +15,23 @@ if(worlds.world.port === "") {
     process.exit()
 }
 
+if(worlds.redemption.port === "") {
+    console.log('[Warning] No redemption port provided server will now close')
+    process.exit()
+}
+
 if(isNaN(worlds.login.port)) {
     console.log('[Warning] Invalid login port provided server will now close')
     process.exit()
 }
 
 if(isNaN(worlds.world.port)) {
-    console.log('[Warning] Invalid world port provided server will now close')
+    console.log('[Warning] Invalid World port provided server will now close')
+    process.exit()
+}
+
+if(isNaN(worlds.redemption.port)) {
+    console.log('[Warning] Invalid redemption port provided server will now close')
     process.exit()
 }
 
