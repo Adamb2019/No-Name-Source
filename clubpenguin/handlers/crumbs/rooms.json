@@ -1,0 +1,8 @@
+[
+    {
+        "Room_Id": 100,
+        "Room_Name": "Town Center",
+        "Max_Users": 120,
+        "Spawn_Room": true
+    }
+]
