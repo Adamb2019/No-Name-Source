@@ -1,8 +1,474 @@
 [
     {
-        "Room_Id": 100,
-        "Room_Name": "Town Center",
-        "Max_Users": 120,
-        "Spawn_Room": true
+        "100": {
+            "Room_Id": 100,
+            "Room_Name": "Town Center",
+            "Music_Id": 950,
+            "Is_Member": false,
+            "Path": "town.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "110": {
+            "Room_Id": 110,
+            "Room_Name": "Coffee Shop",
+            "Music_Id": 429,
+            "Is_Member": false,
+            "Path": "coffee.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "111": {
+            "Room_Id": 111,
+            "Room_Name": "Book Room",
+            "Music_Id": 669,
+            "Is_Member": false,
+            "Path": "book.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "112": {
+            "Room_Id": 112,
+            "Room_Name": "Welcome",
+            "Music_Id": 0,
+            "Is_Member": false,
+            "Path": "welcomesolo.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+    
+        "120": {
+            "Room_Id": 120,
+            "Room_Name": "Night Club",
+            "Music_Id": 673,
+            "Is_Member": false,
+            "Path": "dance.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "121": {
+            "Room_Id": 121,
+            "Room_Name": "Lounge",
+            "Music_Id": 674,
+            "Is_Member": false,
+            "Path": "louge.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "122": {
+            "Room_Id": 122,
+            "Room_Name": "School",
+            "Music_Id": 436,
+            "Is_Member": false,
+            "Path": "school.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "130": {
+            "Room_Id": 130,
+            "Room_Name": "Clothes Shop",
+            "Music_Id": 345,
+            "Is_Member": false,
+            "Path": "shop.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "200": {
+            "Room_Id": 200,
+            "Room_Name": "Ski Village",
+            "Music_Id": 591,
+            "Is_Member": false,
+            "Path": "village.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "210": {
+            "Room_Id": 210,
+            "Room_Name": "Sports Shop",
+            "Music_Id": 0,
+            "Is_Member": false,
+            "Path": "",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "212": {
+            "Room_Id": 212,
+            "Room_Name": "Agent Lobby Multi",
+            "Music_Id": 922,
+            "Is_Member": false,
+            "Path": "agentlobbymulti.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "220": {
+            "Room_Id": 220,
+            "Room_Name": "Ski Lodge",
+            "Music_Id": 589,
+            "Is_Member": false,
+            "Path": "lodge.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "221": {
+            "Room_Id": 221,
+            "Room_Name": "Lodge Attic",
+            "Music_Id": 884,
+            "Is_Member": false,
+            "Path": "attic.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "300": {
+            "Room_Id": 300,
+            "Room_Name": "The Plaza",
+            "Music_Id": 677,
+            "Is_Member": false,
+            "Path": "plaza.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "310": {
+            "Room_Id": 310,
+            "Room_Name": "Pet Shop",
+            "Music_Id": 659,
+            "Is_Member": false,
+            "Path": "pet.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "320": {
+            "Room_Id": 320,
+            "Room_Name": "The Dojo",
+            "Music_Id": 403,
+            "Is_Member": false,
+            "Path": "dojo.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        
+        "321": {
+            "Room_Id": 321,
+            "Room_Name": "Dojo Exterior",
+            "Music_Id": 403,
+            "Is_Member": false,
+            "Path": "dojoext.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "323": {
+            "Room_Id": 323,
+            "Room_Name": "Agent Command",
+            "Music_Id": 642,
+            "Is_Member": false,
+            "Path": "agentcom.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "330": {
+            "Room_Id": 330,
+            "Room_Name": "Pizza Parlor",
+            "Music_Id": 676,
+            "Is_Member": false,
+            "Path": "pizza.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "332": {
+            "Room_Id": 332,
+            "Room_Name": "Ninja Hideout",
+            "Music_Id": 0,
+            "Is_Member": false,
+            "Path": "dojohide.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "340": {
+            "Room_Id": 810,
+            "Room_Name": "The Stage",
+            "Music_Id": 0,
+            "Is_Member": false,
+            "Path": "stage.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "400": {
+            "Room_Id": 400,
+            "Room_Name": "The Beach",
+            "Music_Id": 582,
+            "Is_Member": false,
+            "Path": "beach.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "410": {
+            "Room_Id": 410,
+            "Room_Name": "Lighthouse",
+            "Music_Id": 588,
+            "Is_Member": false,
+            "Path": "light.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "411": {
+            "Room_Id": 411,
+            "Room_Name": "Beacon",
+            "Music_Id": 583,
+            "Is_Member": false,
+            "Path": "beacon.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "420": {
+            "Room_Id": 420,
+            "Room_Name": "Pirate Ship",
+            "Music_Id": 380,
+            "Is_Member": false,
+            "Path": "ship.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "421": {
+            "Room_Id": 421,
+            "Room_Name": "Ship's Hold",
+            "Music_Id": 491,
+            "Is_Member": false,
+            "Path": "shiphold.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "422": {
+            "Room_Id": 422,
+            "Room_Name": "Captain's Quarters",
+            "Music_Id": 491,
+            "Is_Member": false,
+            "Path": "shipquarters.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "423": {
+            "Room_Id": 423,
+            "Room_Name": "The Crows Nest",
+            "Music_Id": 492,
+            "Is_Member": false,
+            "Path": "shipnest.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "800": {
+            "Room_Id": 800,
+            "Room_Name": "The Dock",
+            "Music_Id": 5000,
+            "Is_Member": false,
+            "Path": "dock.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "801": {
+            "Room_Id": 801,
+            "Room_Name": "Snow Forts",
+            "Music_Id": 587,
+            "Is_Member": false,
+            "Path": "forts.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "802": {
+            "Room_Id": 802,
+            "Room_Name": "Ice Rink",
+            "Music_Id": 592,
+            "Is_Member": false,
+            "Path": "rink.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "803": {
+            "Room_Id": 803,
+            "Room_Name": "HQ",
+            "Music_Id": 7,
+            "Is_Member": false,
+            "Path": "agent.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "804": {
+            "Room_Id": 804,
+            "Room_Name": "Boiler Room",
+            "Music_Id": 667,
+            "Is_Member": false,
+            "Path": "boiler.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "805": {
+            "Room_Id": 805,
+            "Room_Name": "Ice Berg",
+            "Music_Id": 584,
+            "Is_Member": false,
+            "Path": "berg.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "806": {
+            "Room_Id": 806,
+            "Room_Name": "Underground Pool",
+            "Music_Id": 532,
+            "Is_Member": false,
+            "Path": "cave.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "807": {
+            "Room_Id": 807,
+            "Room_Name": "Mine Shack",
+            "Music_Id": 580,
+            "Is_Member": false,
+            "Path": "shack.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "808": {
+            "Room_Id": 808,
+            "Room_Name": "The Mine",
+            "Music_Id": 675,
+            "Is_Member": false,
+            "Path": "mine.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "809": {
+            "Room_Id": 809,
+            "Room_Name": "Forest",
+            "Music_Id": 586,
+            "Is_Member": false,
+            "Path": "forest.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "810": {
+            "Room_Id": 810,
+            "Room_Name": "Cove",
+            "Music_Id": 579,
+            "Is_Member": false,
+            "Path": "cove.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "811": {
+            "Room_Id": 811,
+            "Room_Name": "Box Dimension",
+            "Music_Id": 372,
+            "Is_Member": false,
+            "Path": "boxdimension.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "812": {
+            "Room_Id": 812,
+            "Room_Name": "Dojo Fire",
+            "Music_Id": 405,
+            "Is_Member": false,
+            "Path": "dojofire.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "813": {
+            "Room_Id": 813,
+            "Room_Name": "Gold Mine",
+            "Music_Id": 532,
+            "Is_Member": false,
+            "Path": "cavemine.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "814": {
+            "Room_Id": 814,
+            "Room_Name": "Lake",
+            "Music_Id": 666,
+            "Is_Member": false,
+            "Path": "lake.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "815": {
+            "Room_Id": 815,
+            "Room_Name": "Underwater",
+            "Music_Id": 671,
+            "Is_Member": false,
+            "Path": "underwater.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "816": {
+            "Room_Id": 816,
+            "Room_Name": "Dojo Water",
+            "Music_Id": 406,
+            "Is_Member": false,
+            "Path": "dojowater.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "851": {
+            "Room_Id": 851,
+            "Room_Name": "Party1",
+            "Music_Id": 1061,
+            "Is_Member": false,
+            "Path": "party1.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        },
+
+        "852": {
+            "Room_Id": 852,
+            "Room_Name": "Party2",
+            "Music_Id": 1061,
+            "Is_Member": false,
+            "Path": "party2.swf",
+            "Required_Item": null,
+            "Max_Users": 80
+        }
     }
 ]
