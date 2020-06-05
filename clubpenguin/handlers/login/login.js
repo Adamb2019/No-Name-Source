@@ -39,7 +39,7 @@ const server = net.createServer(function(connection) {
 })
 
 server.listen(worlds.login.port, function() {
-    console.log('login server listening on port 6112')
+    console.log('[Server] Login server listening on port 6112')
 });
 
 function policy(data) {
@@ -80,11 +80,19 @@ function login(data, client) {
                         console.log(`${username} failed to login as password doesnt match`)
                         client.send_error(INCORRECT_PASSWORD)
                     } else {
-                        database.query(`UPDATE penguins SET LoginKey = '${randomKey}' WHERE Username = '${username}'`)
-                        database.query(`SELECT * FROM penguins WHERE username = '${username}'`, async function(err, results1) {
-                            let loginKey = results1[0].LoginKey
-                            client.send_xt('l', -1, id, loginKey, '', '100,5')
-                        })
+                        if(results[0].Active === '0') {
+                            client.send_error(ACCOUNT_NOT_ACTIVATED)
+                        } else {
+                            if(results[0].PermaBan === '1') {
+                                client.send_error(BAN_FOREVER)
+                            } else {
+                                database.query(`UPDATE penguins SET LoginKey = '${randomKey}' WHERE username = '${username}'`)
+                                database.query(`SELECT * FROM penguins WHERE username = '${username}'`, async function(err, results1) {
+                                    let loginKey = results1[0].LoginKey
+                                    client.send_xt('l', -1, id, loginKey, '', '100,5')
+                                })
+                            }
+                        }
                     }
                 }
             })
