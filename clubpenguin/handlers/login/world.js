@@ -10,6 +10,7 @@ let penguinsOnline = []
 const server = net.createServer(function(connection) {
     let client = new penguin(connection)
     penguinsOnline.push(connection)
+    console.log(connection)
     console.log(`Penguin connected to the world server || Their are currently ${penguinsOnline.length} penguin's online`)
 
     // if(worlds.world.moderator === true && !client.moderator) {
@@ -22,7 +23,7 @@ const server = net.createServer(function(connection) {
         console.log(`Penguin disconnected to the world server || Their are currently ${penguinsOnline.length} penguin's online`)
     })
 
-    connection.on('data', function(data) {
+    connection.on('data', async function(data) {
         let data1 = data.toString().split('\0')[0]
         if(verChk(data1)) {
             client.send_xml('<msg t="sys"><body action="apiOK" r="0"></body></msg>')
@@ -31,6 +32,14 @@ const server = net.createServer(function(connection) {
                 client.send_xml('<msg t="sys"><body action="rndK" r="-1"><k>nodeJS</k></body></msg>')
             } else {
                 login(data1, client)
+                console.log(data1)
+                if(data1.indexOf("j#jr") >= 0) { // join room
+                    client.doesRoomExist(data1, client)
+                }
+
+                if(data1.indexOf("i#ai") >= 0) { // if player is adding an item
+                    client.addItem(data1, client)
+                }
             }
         }
     })
@@ -53,20 +62,20 @@ function rndK(data) {
 }
 
 function login(data, client) {
-    parseString(data, function (err, result) {
+    parseString(data, async function (err, result) {
         if(result) {
-            let username = result.msg.body[0].login[0].nick[0].toLowerCase()
-            let nickname = result.msg.body[0].login[0].nick[0]
+            let username = result.msg.body[0].login[0].nick[0]
+            let nickname = result.msg.body[0].login[0].nick[0].toLowerCase()
             let password = result.msg.body[0].login[0].pword[0]
             let key = password.substr(32)
-            database.query(`SELECT * FROM penguins WHERE username = '${username}'`, async function(err, results) {
-                database.query(`SELECT * FROM inventory WHERE username = '${username}'`, function(err, results1) {
+            database.query(`SELECT * FROM penguins WHERE nickname = '${nickname}'`, function(err, results) {
+                database.query(`SELECT * FROM inventory WHERE username = '${username}'`, async function(err, results1) {
                     let loginKey = results[0].LoginKey
                     if(results[0].LoginKey === "") {
                         client.disconnect()
                     } else {
                         if(key === loginKey) {
-                            client.joinServer(results[0], client, results1[0])
+                           await client.joinServer(results[0], client, results1[0])
                         } else {
                             client.send_error(INCORRECT_PASSWORD)
                     }
