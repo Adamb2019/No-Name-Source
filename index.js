@@ -1,23 +1,33 @@
 const fs = require('fs')
-const path = require('path')
+const Path = require('Path')
 const login = require('./clubpenguin/handlers/login/login.js')
 const world = require('./clubpenguin/handlers/login/world.js')
 const database = require('./clubpenguin/database/database.js')
 const redemption = require('./clubpenguin/handlers/redemption/redemption.js')
 const databaseInfo = require('./connections/database.json')
 const worlds = require('./connections/worlds.json')
+const rooms = require('./clubpenguin/handlers/crumbs/rooms.json')
+const items = require('./clubpenguin/handlers/crumbs/items.json')
+const igloo = require('./clubpenguin/handlers/crumbs/igloo.json')
+const iglooFloor = require('./clubpenguin/handlers/crumbs/iglooFloor.json')
+const furniture = require('./clubpenguin/handlers/crumbs/furniture.json')
 
-let cmdPath = path.join(__dirname, '/clubpenguin/handlers/world/commands/')
-let pluginsPath = path.join(__dirname, '/clubpenguin/plugins/')
-let rooms = require('./clubpenguin/handlers/crumbs/rooms.json')
+let cmdPath = Path.join(__dirname, '/clubpenguin/handlers/world/commands/')
+let pluginsPath = Path.join(__dirname, '/clubpenguin/plugins/')
 
-let commands = fs.readdir(cmdPath, function(err, results) {
+fs.readdir(cmdPath, function(err, results) {
     console.log(`[Server] Loaded ${results.length} command's`)
 });
 
-let plugins = fs.readdir(pluginsPath, function(err, results) {
+fs.readdir(pluginsPath, function(err, results) {
     console.log(`[Server] Loaded ${results.length} plugin's`)
 });
+
+console.log(`[Server] An as2 Club Penguin emulator written in Node JS`)
+console.log(`[Server] Loaded ${Object.keys(items).length} Items`)
+console.log(`[Server] Loaded ${Object.keys(igloo).length} Igloos`)
+console.log(`[Server] Loaded ${Object.keys(iglooFloor).length} Igloo Floors`)
+console.log(`[Server] Loaded ${Object.keys(furniture).length} Furnitures`)
 
 if(worlds.login.port === "") {
     console.log('[Warning] No login port provided server will now close')
