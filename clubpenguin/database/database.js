@@ -10,6 +10,7 @@ const database = mysql.createConnection({
 
 database.connect(function(err) {
     if(err) {
+        database.destroy()
         throw err
     }
 });
