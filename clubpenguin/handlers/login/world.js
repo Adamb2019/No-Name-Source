@@ -10,7 +10,6 @@ let penguinsOnline = []
 const server = net.createServer(function(connection) {
     let client = new penguin(connection)
     penguinsOnline.push(connection)
-    console.log(connection)
     console.log(`Penguin connected to the world server || Their are currently ${penguinsOnline.length} penguin's online`)
 
     // if(worlds.world.moderator === true && !client.moderator) {
@@ -40,6 +39,48 @@ const server = net.createServer(function(connection) {
                 if(data1.indexOf("i#ai") >= 0) { // if player is adding an item
                     client.addItem(data1, client)
                 }
+
+                if(data1.indexOf("s#upc") >= 0) { // if player is changing color
+                    client.updateColor(data1, client)
+                }
+
+                if(data1.indexOf("s#uph") >= 0) { // if player is changing head
+                    client.updateHead(data1, client)
+                }
+
+                if(data1.indexOf("s#upf") >= 0) { // if player is changing face
+                    client.updateFace(data1, client)
+                }
+
+                if(data1.indexOf("s#upn") >= 0) { // if player is changing neck
+                    client.updateNeck(data1, client)
+                }
+
+                if(data1.indexOf("s#upb") >= 0) { // if player is changing body
+                    client.updateBody(data1, client)
+                }
+
+                if(data1.indexOf("s#upa") >= 0) { // if player is changing hand
+                    client.updateHand(data1, client)
+                }
+
+                if(data1.indexOf("s#upe") >= 0) { // if player is changing feet lmao sounds weird :/
+                    client.updateFeet(data1, client)
+                }
+
+                if(data1.indexOf("s#upp") >= 0) { // if player is changing background
+                    client.updateBackground(data1, client)
+                }
+
+                if(data1.indexOf("s#upl") >= 0) { // if player is changing pin
+                    client.updatePin(data1, client)
+                }
+
+                if(data1.indexOf("z%zo") >= 0) { // end game packet
+                    client.gameOver(data1, client)
+                }
+
+                client.heartBeat(client)
             }
         }
     })
@@ -64,25 +105,23 @@ function rndK(data) {
 function login(data, client) {
     parseString(data, async function (err, result) {
         if(result) {
-            let username = result.msg.body[0].login[0].nick[0]
-            let nickname = result.msg.body[0].login[0].nick[0].toLowerCase()
+            let username = result.msg.body[0].login[0].nick[0].toLowerCase()
             let password = result.msg.body[0].login[0].pword[0]
             let key = password.substr(32)
-            database.query(`SELECT * FROM penguins WHERE nickname = '${nickname}'`, function(err, results) {
-                database.query(`SELECT * FROM inventory WHERE username = '${username}'`, async function(err, results1) {
-                    let loginKey = results[0].LoginKey
-                    if(results[0].LoginKey === "") {
-                        client.disconnect()
+            database.query(`SELECT * FROM penguins WHERE Username = '${username}'`, async function(err, results) {
+                let loginKey = results[0].LoginKey
+                if(results[0].LoginKey === "") {
+                    client.disconnect()
+                } else {
+                    if(key === loginKey) {
+                        console.log(data)
+                        client.joinServer(results[0], client)
+                        console.log(data)
                     } else {
-                        if(key === loginKey) {
-                           await client.joinServer(results[0], client, results1[0])
-                        } else {
-                            client.send_error(INCORRECT_PASSWORD)
+                        client.send_error(INCORRECT_PASSWORD)
                     }
                 }
-                })
             })
         }
-
     })
 }
