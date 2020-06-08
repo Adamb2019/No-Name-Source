@@ -1,7 +1,6 @@
 const database = require('./database/database.js')
 const rooms = require('./handlers/crumbs/rooms.json')
 const items = require('./handlers/crumbs/items.json')
-const roomHan = require('./room.js')
 
 let clients = []
 
