@@ -15,4 +15,6 @@ Mysql - npm install mysql
 
 Xml2js - npm install xml2js
 
+default login is Adam - password
+
 Add my discord adamb#1917 if you need help setting up
