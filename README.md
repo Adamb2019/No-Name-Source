@@ -15,3 +15,4 @@ Mysql - npm install mysql
 
 Xml2js - npm install xml2js
 
+Add my discord adamb#1917 if you need help setting up
