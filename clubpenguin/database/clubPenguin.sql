@@ -11,6 +11,9 @@ CREATE TABLE `inventory` (
     PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COMMENT='inventory';
 
+INSERT INTO `inventory` (`ID`, `PenguinID`, `Username`, `ItemID`) VALUES
+(1, '1', 'Adam', '102');
+
 DROP TABLE IF EXISTS `penguins`;
 CREATE TABLE `penguins` (
     `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Penguin ID',
@@ -38,6 +41,10 @@ CREATE TABLE `penguins` (
     `Flag` text NOT NULL DEFAULT 0 COMMENT 'Pin Item',
     PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COMMENT='penguins';
+
+INSERT INTO `penguins` (`ID`, `Username`, `Nickname`, `Password`, `Email`, `Created`, `LoginKey`, `Approved`, `Active`, `SafeChat`, `Moderator`, `Banned`, `PermaBan`, `Color`, `Coins`, `Head`, `Face`, `Neck`, `Body`, `Hand`, `Feet`, `Photo`, `Flag`) VALUES
+(1, 'Adam', 'adam', '$2b$12$XRECcqgjoQ70vjw9XugPW.5uOZ6cB6AiFJP0xY/AOfqS7BFaZMUJe', 'Adam@gmail.com', '2020-06-06 23:25:07', '78d6d71da776e46d20b5f7481cb40d81c9fac8a2', '0', '1', '0', '0', '0', '0', '3', '9999', '414', '0', '170', '0', '321', '358', '9051', '527');
+
 
 DROP TABLE IF EXISTS `Code`;
 CREATE TABLE `Redemption_Code` (
