@@ -1,6 +1,7 @@
 const database = require('./database/database.js')
 const rooms = require('./handlers/crumbs/rooms.json')
 const items = require('./handlers/crumbs/items.json')
+const roomHan = require('./room.js')
 
 let clients = []
 
@@ -175,30 +176,23 @@ class penguin {
     }
 
     addCoins(client, amount) {
-      database.query(`SELECT * FROM penguins WHERE username = '${client.username}'`, function(err, results) {
-        let playerCoins = client.coins
-        let coinsAdd = amount
-        let newCoins = +playerCoins + coinsAdd
+      let coinsAdd = amount
+      let newCoins = +client.coins + coinsAdd
 
-        database.query(`UPDATE penguins SET coins = '${newCoins}' WHERE username = '${client.username}'`)
-        playerCoins = newCoins
+      database.query(`UPDATE penguins SET coins = '${newCoins}' WHERE username = '${client.username}'`)
+      client.coins = newCoins
 
-        return newCoins
-      })
-    }
+      return newCoins
+    } 
 
     removeCoins(client, amount) {
-      database.query(`SELECT * FROM penguins WHERE username = '${client.username}'`, function(err, results) {
-        let playerCoins = client.coins
-        let coinsRemove = amount
-        let newCoins = playerCoins - coinsRemove
+      let coinsRemove = amount
+      let newCoins = client.coins - coinsRemove
 
-        database.query(`UPDATE penguins SET coins = '${newCoins}' WHERE username = '${client.username}'`)
-        playerCoins = newCoins
-        console.log(playerCoins)
+      database.query(`UPDATE penguins SET coins = '${newCoins}' WHERE username = '${client.username}'`)
+      client.coins = newCoins
   
-        return newCoins // coin removal works but when it resets coins to 0 on player interface NEEDS FIXING!!
-      })
+      return newCoins
     }
 
     heartBeat(client) {
@@ -208,10 +202,9 @@ class penguin {
     updateColor(data, client) {
       let data1 = data.split('%')
       let colorID = data1[5]
-      let color = client.color
   
       database.query(`UPDATE penguins SET Color = '${colorID}' WHERE username = '${client.username}'`)
-      color = colorID
+      client.color = colorID
       return client.send_xt('upc', -1, client.id, colorID)
     }
 
@@ -296,7 +289,7 @@ class penguin {
       let data1 = data.split('%')
       let pinID = data1[5]
       let pin = client.pinID
-  
+
       database.query(`UPDATE penguins SET Flag = '${pinID}' WHERE username = '${client.username}'`)
       pin = pinID
       return client.send_xt('upl', -1, client.id, pinID)
