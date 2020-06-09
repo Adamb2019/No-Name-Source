@@ -1,4 +1,5 @@
 const database = require('./database/database.js')
+const worlds = require('../connections/worlds.json')
 const rooms = require('./handlers/crumbs/rooms.json')
 const items = require('./handlers/crumbs/items.json')
 
@@ -33,15 +34,13 @@ class penguin {
     }
 
     playerStuff(result) { // for anything else when ur not sending the playerString
-      let dayCreated = DATE_FORMAT(result.age)
-      console.log(dayCreated)
       this.id = result.ID
       this.username = result.Username
       this.created = result.Created // doesnt return pLayers age rn
       this.loginKey = result.LoginKey
       this.approved = result.Approved
       this.active = result.Active
-      this.safecChat = result.SafeChat
+      this.safeChat = result.SafeChat
       this.moderator = result.Moderator
       this.banned = result.Banned
       this.permaBan = result.PermaBan
@@ -55,6 +54,7 @@ class penguin {
       this.feet = result.Feet
       this.photo = result.Photo
       this.flag = result.Flag
+      this.rank = result.Rank
     }
 
     playerString(result) { // for load player packet
@@ -78,12 +78,12 @@ class penguin {
       this.y = 0,
       this.frame = 1,
       1,
-      this.rank = 1
+      this.rank = result.Rank
       ]
       return playerArray.join('|')
     }
 
-    joinServer(data, client) {
+    async joinServer(data, client) {
       client.send_xt('l')
       client.send_xt('js', -1, 0, 1, data.Moderator)
       // client.send_xt('gps', -1, '') pLayer stamps but rn stamps arent added
@@ -125,35 +125,25 @@ class penguin {
       })
     }
 
-    getInventory(client) { // NEED TO USE PROMISE SO IT WAITS
-      let inventory = ['414', '1']
-      database.query(`SELECT * FROM inventory WHERE username = '${client.username}'`, function(err, result) {
-        Object.keys(result).forEach(function (item) {
-          let items = result[item].ItemID
-          console.log(items)
-          inventory.push(items)
-        })
-        console.log(inventory.join('%'))
-      })
-      console.log(`hello ${inventory.join('%')}`)
-      return inventory.join('%')
-    }
-
-    async getInventory(client) {
-      let inventory = ['414']
+    getInventory(client) {
       return new Promise(function(resolve, reject) {
-        database.query(`SELECT * FROM inventory WHERE username = '${client.username}'`, async function(err, result) {
+        let inventory = []
+        database.query(`SELECT * FROM inventory WHERE username = '${client.username}'`, function(err, result) {
           Object.keys(result).forEach(function (item) {
             let items = result[item].ItemID
             inventory.push(items)
-            return resolve(inventory.join('%'))
           })
+          return resolve(inventory.join('%'))
         })
       })
     }
 
     sendInventory(client) {
-      return client.send_xt('gi', -1, client.getInventory(client))
+      this.getInventory(client).then(inventory => {
+        if(inventory) {
+          return client.send_xt('gi', -1, inventory)
+        }
+      })
     }
 
     addItem(data, client) {
@@ -202,7 +192,7 @@ class penguin {
       let data1 = data.split('%')
       let colorID = data1[5]
   
-      database.query(`UPDATE penguins SET Color = '${colorID}' WHERE username = '${client.username}'`)
+      database.query(`UPDATE penguins SET color = '${colorID}' WHERE username = '${client.username}'`)
       client.color = colorID
       return client.send_xt('upc', -1, client.id, colorID)
     }
@@ -210,10 +200,9 @@ class penguin {
     updateHead(data, client) {
       let data1 = data.split('%')
       let headID = data1[5]
-      let head = client.headID
   
       database.query(`UPDATE penguins SET Head = '${headID}' WHERE username = '${client.username}'`)
-      head = headID
+      client.head = headID
       return client.send_xt('uph', -1, client.id, headID)
     }
 
@@ -221,10 +210,9 @@ class penguin {
     updateFace(data, client) {
       let data1 = data.split('%')
       let faceID = data1[5]
-      let face = client.faceID
   
       database.query(`UPDATE penguins SET Face = '${faceID}' WHERE username = '${client.username}'`)
-      face = faceID
+      client.face = faceID
       return client.send_xt('upf', -1, client.id, faceID)
     }
 
@@ -232,10 +220,9 @@ class penguin {
     updateNeck(data, client) {
       let data1 = data.split('%')
       let neckID = data1[5]
-      let Neck = client.neckID
   
       database.query(`UPDATE penguins SET Neck = '${neckID}' WHERE username = '${client.username}'`)
-      neck = neckID
+      client.neck = neckID
       return client.send_xt('upn', -1, client.id, neckID)
     }
 
@@ -243,10 +230,9 @@ class penguin {
     updateBody(data, client) {
       let data1 = data.split('%')
       let bodyID = data1[5]
-      let body = client.bodyID
   
       database.query(`UPDATE penguins SET Body = '${bodyID}' WHERE username = '${client.username}'`)
-      body = bodyID
+      client.body = bodyID
       return client.send_xt('upb', -1, client.id, bodyID)
     }
 
@@ -254,10 +240,9 @@ class penguin {
     updateHand(data, client) {
       let data1 = data.split('%')
       let handID = data1[5]
-      let hand = client.handID
   
       database.query(`UPDATE penguins SET Hand = '${handID}' WHERE username = '${client.username}'`)
-      hand = handID
+      client.hand = handID
       return client.send_xt('upa', -1, client.id, handID)
     }
 
@@ -265,10 +250,9 @@ class penguin {
     updateFeet(data, client) {
       let data1 = data.split('%')
       let feetID = data1[5]
-      let feet = client.feetID
   
       database.query(`UPDATE penguins SET Feet = '${feetID}' WHERE username = '${client.username}'`)
-      feet = feetID
+      client.feet = feetID
       return client.send_xt('upe', -1, client.id, feetID)
     }
 
@@ -276,10 +260,9 @@ class penguin {
     updateBackground(data, client) {
       let data1 = data.split('%')
       let backgroundID = data1[5]
-      let background = client.photo
   
       database.query(`UPDATE penguins SET Photo = '${backgroundID}' WHERE username = '${client.username}'`)
-      background = backgroundID
+      client.photo = backgroundID
       return client.send_xt('upp', -1, client.id, backgroundID)
     }
 
@@ -287,10 +270,9 @@ class penguin {
     updatePin(data, client) {
       let data1 = data.split('%')
       let pinID = data1[5]
-      let pin = client.pinID
 
       database.query(`UPDATE penguins SET Flag = '${pinID}' WHERE username = '${client.username}'`)
-      pin = pinID
+      client.flag = pinID
       return client.send_xt('upl', -1, client.id, pinID)
     }
   
