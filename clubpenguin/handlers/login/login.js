@@ -2,6 +2,7 @@ const net = require('net')
 const parseString = require('xml2js').parseString
 const database = require('../../database/database.js')
 const bcrypt = require('bcrypt')
+const fetch = require('node-fetch')
 const penguin = require('../../penguin.js')
 const crypto = require('../../crypto.js')
 const generateKey = require('../../crypto.js')
@@ -86,10 +87,15 @@ function login(data, client) {
                             if(results[0].PermaBan === '1') {
                                 client.send_error(BAN_FOREVER)
                             } else {
-                                database.query(`UPDATE penguins SET LoginKey = '${randomKey}' WHERE username = '${username}'`)
-                                database.query(`SELECT * FROM penguins WHERE username = '${username}'`, async function(err, results1) {
-                                    let loginKey = results1[0].LoginKey
-                                    client.send_xt('l', -1, id, loginKey, '', '100,5')
+                                fetch('https://api.ipify.org?format=json')
+                                .then(res => res.json())
+                                .then(json => {
+                                    database.query(`UPDATE penguins SET LoginKey = '${randomKey}' WHERE username = '${username}'`)
+                                    database.query(`SELECT * FROM penguins WHERE username = '${username}'`, function(err, results1) {
+                                        let loginKey = results1[0].LoginKey
+                                        database.query(`INSERT INTO Login (PenguinID, Username, IPAddress) VALUES ('${results1[0].ID}', '${results1[0].Username}', '${json.ip}')`)
+                                        client.send_xt('l', -1, id, loginKey, '', '100,5')
+                                    })
                                 })
                             }
                         }
