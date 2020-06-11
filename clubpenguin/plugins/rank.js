@@ -18,6 +18,7 @@ class rank {
                 let rank = results[0].Rank
                 if(penguinAge === threeMonths) {
                     if(!rank === 1) {
+                        database.query(`UPDATE penguins SET Rank = '1' WHERE username = '${client.username}'`) // reset rank cause they cheated 
                         client.disconnect()
                     } else {
                         if(rank === '1') {
@@ -30,6 +31,7 @@ class rank {
     
                 if(penguinAge === sixMonths) {
                     if(!rank === 2) { 
+                        database.query(`UPDATE penguins SET Rank = '2' WHERE username = '${client.username}'`) // reset rank cause they cheated 
                         client.disconnect()
                     } else {
                         if(rank === 2) {
@@ -43,6 +45,7 @@ class rank {
     
                 if(penguinAge === nineMonths || penguinAge > nineMonths) {
                     if(!rank === 3) {
+                        database.query(`UPDATE penguins SET Rank = '3' WHERE username = '${client.username}'`) // reset rank cause they cheated 
                         client.disconnect()
                     } else {
                         if(rank === 3) {
@@ -56,6 +59,7 @@ class rank {
     
                 if(penguinAge === year || penguinAge > year) {
                     if(!rank === 4) {
+                        database.query(`UPDATE penguins SET Rank = '4' WHERE username = '${client.username}'`) // reset rank cause they cheated 
                         client.disconnect()
                     } else {
                         if(rank === 4) {
