@@ -12,7 +12,14 @@ CREATE TABLE `inventory` (
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COMMENT='inventory';
 
 INSERT INTO `inventory` (`ID`, `PenguinID`, `Username`, `ItemID`) VALUES
-(1, '1', 'Adam', '102');
+(1, '1', 'Adam', '102'),
+(2, '1', 'Adam', '414'),
+(3, '1', 'Adam', '5'),
+(4, '1', 'Adam', '173'),
+(5, '1', 'Adam', '221'),
+(6, '1', 'Adam', '352'),
+(7, '1', 'Adam', '959'),
+(8, '1', 'Adam', '566');
 
 DROP TABLE IF EXISTS `penguins`;
 CREATE TABLE `penguins` (
@@ -43,8 +50,8 @@ CREATE TABLE `penguins` (
     PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COMMENT='penguins';
 
-INSERT INTO `penguins` (`ID`, `Username`, `Nickname`, `Password`, `Email`, `Created`, `LoginKey`, `Approved`, `Active`, `SafeChat`, `Moderator`, `Banned`, `PermaBan`, `Color`, `Coins`, `Head`, `Face`, `Neck`, `Body`, `Hand`, `Feet`, `Photo`, `Flag`) VALUES
-(1, 'Adam', 'adam', '$2b$12$XRECcqgjoQ70vjw9XugPW.5uOZ6cB6AiFJP0xY/AOfqS7BFaZMUJe', 'Adam@gmail.com', '2020-06-08 23:44:07', '78d6d71da776e46d20b5f7481cb40d81c9fac8a2', '0', '1', '0', '0', '0', '0', '3', '9999', '414', '0', '170', '0', '321', '358', '9051', '527');
+INSERT INTO `penguins` (`ID`, `Username`, `Nickname`, `Password`, `Email`, `Created`, `LoginKey`, `Approved`, `Active`, `SafeChat`, `Moderator`, `Banned`, `PermaBan`, `Color`, `Coins`, `Head`, `Face`, `Neck`, `Body`, `Hand`, `Feet`, `Photo`, `Flag`, `Rank`) VALUES
+(1, 'Adam', 'adam', '$2b$12$XRECcqgjoQ70vjw9XugPW.5uOZ6cB6AiFJP0xY/AOfqS7BFaZMUJe', 'Adam@gmail.com', '2020-06-08 23:44:07', '78d6d71da776e46d20b5f7481cb40d81c9fac8a2', '0', '1', '0', '0', '0', '0', '5', '9999', '414', '0', '173', '221', '0', '352', '959', '566', '6');
 
 DROP TABLE IF EXISTS `Login`;
 CREATE TABLE `Login` (
@@ -58,6 +65,16 @@ CREATE TABLE `Login` (
 
 INSERT INTO `login` (`PenguinID`, `Username`, `Date`, `IPAddress`) VALUES
 (1, 'Adam', '2020-06-08 23:44:07', '127.0.0.1'); -- 127.0.0.1 my is my ip address br0
+
+DROP TABLE IF EXISTS `Ip_Bans`;
+CREATE TABLE `Ip_Bans` (
+    `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Number of Logins',
+    `IPAddress` text NOT NULL COMMENT 'Penguin IP Address',
+    PRIMARY KEY(`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COMMENT='IP Ban Records';
+
+INSERT INTO `Ip_Bans` (`IPAddress`) VALUES
+('127.0.0.1'); -- also my ip address
 
 DROP TABLE IF EXISTS `Redemption_Code`;
 CREATE TABLE `Redemption_Code` (
