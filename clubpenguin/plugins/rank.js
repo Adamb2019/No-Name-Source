@@ -11,39 +11,62 @@ let nineMonths = 273
 let year = 365
 
 class rank {
-    rankUpdate(username) {
-        database.query(`SELECT * FROM penguins WHERE Username = '${username}'`, function(err, results) {
+    rankUpdate(client) {
+        database.query(`SELECT * FROM penguins WHERE username = '${client.username}'`, function(err, results) {
             if(results) {
-                let penguinAge = results[0].Age
-                let penguinAge2 = +penguinAge + 1
+                let penguinAge = 91
+                let rank = results[0].Rank
                 if(penguinAge === threeMonths) {
-                    database.query(`UPDATE penguins SET Age = '${penguinAge2}' WHERE Username = '${username}'`)
-                    database.query(`UPDATE penguins SET Rank = '2' WHERE Username = '${username}'`)
-                } else {
-                    console.log(`error updating ${username}'s rank`)
+                    if(!rank === 1) {
+                        client.disconnect()
+                    } else {
+                        if(rank === '1') {
+                            database.query(`UPDATE penguins SET Rank = '2' WHERE username = '${client.username}'`)
+                        } else {
+                            return false
+                        }
+                    }
                 }
-
+    
                 if(penguinAge === sixMonths) {
-                    database.query(`UPDATE penguins SET Age = '${penguinAge2}' WHERE Username = '${username}'`)
-                    database.query(`UPDATE penguins SET Rank = '3' WHERE Username = '${username}'`)
-                } else {
-                    console.log(`error updating ${username}'s rank`)
+                    if(!rank === 2) { 
+                        client.disconnect()
+                    } else {
+                        if(rank === 2) {
+                            database.query(`UPDATE penguins SET Rank = '3' WHERE username = '${client.username}'`)
+                            console.log(`Updated ${client.username} to rank 3`)
+                        } else {
+                            return false
+                        }
+                    }
                 }
-
-                if(penguinAge === nineMonths) {
-                    database.query(`UPDATE penguins SET Age = '${penguinAge2}' WHERE Username = '${username}'`)
-                    database.query(`UPDATE penguins SET Rank = '4' WHERE Username = '${username}'`)
-                } else {
-                    console.log(`error updating ${username}'s rank`)
+    
+                if(penguinAge === nineMonths || penguinAge > nineMonths) {
+                    if(!rank === 3) {
+                        client.disconnect()
+                    } else {
+                        if(rank === 3) {
+                            database.query(`UPDATE penguins SET Rank = '4' WHERE username = '${client.username}'`)
+                            console.log(`Updated ${client.username} to rank 4`)
+                        } else {
+                            return false
+                        }
+                    }
                 }
-
-                if(penguinAge === year) {
-                    database.query(`UPDATE penguins SET Age = '${penguinAge2}' WHERE Username = '${username}'`)
-                    database.query(`UPDATE penguins SET Rank = '5' WHERE Username = '${username}'`)
-                } else {
-                    console.log(`error updating ${username}'s rank`)
+    
+                if(penguinAge === year || penguinAge > year) {
+                    if(!rank === 4) {
+                        client.disconnect()
+                    } else {
+                        if(rank === 4) {
+                            database.query(`UPDATE penguins SET Rank = '6' WHERE username = '${client.username}'`)
+                            console.log(`Updated ${client.username} to rank 6`)
+                        } else {
+                            return false
+                        }
+                    }
                 }
-            }
+            } 
         })
     }
 }
