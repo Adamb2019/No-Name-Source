@@ -14,11 +14,11 @@ let penguinsOnline = []
 const server = net.createServer(function(connection) {
     let client = new penguin(connection)
     penguinsOnline.push(connection)
-    console.log(`Penguin connected to the login server || Their are currently ${penguinsOnline.length} penguin's online`)
+    console.log(`[Info] Penguin connected to the login server || Their are currently ${penguinsOnline.length} penguin's online`)
 
     connection.on('end', function() {
         penguinsOnline.splice(penguinsOnline.indexOf(connection), 1)
-        console.log(`Penguin disconnected to the login server || Their are currently ${penguinsOnline.length} penguin's online`)
+        console.log(`[Info] Penguin disconnected to the login server || Their are currently ${penguinsOnline.length} penguin's online`)
     })
 
     connection.on('data', function(data) {
@@ -90,11 +90,17 @@ function login(data, client) {
                                 fetch('https://api.ipify.org?format=json')
                                 .then(res => res.json())
                                 .then(json => {
-                                    database.query(`UPDATE penguins SET LoginKey = '${randomKey}' WHERE username = '${username}'`)
-                                    database.query(`SELECT * FROM penguins WHERE username = '${username}'`, function(err, results1) {
-                                        let loginKey = results1[0].LoginKey
-                                        database.query(`INSERT INTO Login (PenguinID, Username, IPAddress) VALUES ('${results1[0].ID}', '${results1[0].Username}', '${json.ip}')`)
-                                        client.send_xt('l', -1, id, loginKey, '', '100,5')
+                                    database.query(`SELECT * FROM ip_bans WHERE IPAddress = '${json.ip}'`, function(err, results1) {
+                                        if(results1.length >= 1) {
+                                            client.disconnect()
+                                        } else {
+                                            database.query(`UPDATE penguins SET LoginKey = '${randomKey}' WHERE username = '${username}'`)
+                                            database.query(`SELECT * FROM penguins WHERE username = '${username}'`, function(err, results2) {
+                                                let loginKey = results2[0].LoginKey
+                                                database.query(`INSERT INTO Login (PenguinID, Username, IPAddress) VALUES ('${results2[0].ID}', '${results2[0].Username}', '${json.ip}')`)
+                                                client.send_xt('l', -1, id, loginKey, '', '100,5')
+                                            })
+                                        }
                                     })
                                 })
                             }
@@ -105,3 +111,4 @@ function login(data, client) {
         }
     })
 }
+
