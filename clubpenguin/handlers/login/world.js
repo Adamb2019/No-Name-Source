@@ -1,6 +1,8 @@
 const net = require('net')
 const parseString = require('xml2js').parseString
 const penguin = require('../../penguin.js')
+const handleCommands = require('../../plugins/commands.js')
+const Room = require('../../room.js')
 const database = require('../../database/database.js')
 const errors = require('../../errors.js')
 const worlds = require('../../../connections/worlds.json')
@@ -9,17 +11,15 @@ let penguinsOnline = []
 
 const server = net.createServer(function(connection) {
     let client = new penguin(connection)
+    console.log(connection)
+    let commands = new handleCommands()
+    let roomSystem = new Room()
     penguinsOnline.push(connection)
-    console.log(`Penguin connected to the world server || Their are currently ${penguinsOnline.length} penguin's online`)
-
-    // if(worlds.world.moderator === true && !client.moderator) {
-    //     console.log('Penguin trying to connect to a moderator server destorying socket')
-    //     client.disconnect()
-    // }
+    console.log(`[Info] Penguin connected to the world server || Their are currently ${penguinsOnline.length} penguin's online`)
 
     connection.on('end', function() {
         penguinsOnline.splice(penguinsOnline.indexOf(connection), 1)
-        console.log(`Penguin disconnected to the world server || Their are currently ${penguinsOnline.length} penguin's online`)
+        console.log(`[Info] Penguin disconnected to the world server || Their are currently ${penguinsOnline.length} penguin's online`)
     })
 
     connection.on('data', async function(data) {
@@ -31,9 +31,12 @@ const server = net.createServer(function(connection) {
                 client.send_xml('<msg t="sys"><body action="rndK" r="-1"><k>nodeJS</k></body></msg>')
             } else {
                 login(data1, client)
-                console.log(data1)
-                if(data1.indexOf("j#jr") >= 0) { // join room
-                    client.doesRoomExist(data1, client)
+                if(data1.indexOf("xt") >= 0) { // checks to see if packet contains XT 
+                    console.log(`[Info] INCOMING XT: ${data1}`)
+                }
+
+                if(data1.indexOf("j#jr") >= 0) { // jadd user to room
+                    roomSystem.addUser(data1, client)
                 }
 
                 if(data1.indexOf("i#ai") >= 0) { // if player is adding an item
@@ -78,9 +81,17 @@ const server = net.createServer(function(connection) {
 
                 if(data1.indexOf("z%zo") >= 0) { // end game packet
                     client.gameOver(data1, client)
+                } 
+
+                if(data1.indexOf("!playersonline") >= 0) { // players online command
+                    commands.online(data1, client, penguinsOnline.length)
                 }
 
-                client.heartBeat(client)
+                if(data1.indexOf("!ai") >= 0) { // add item
+                    commands.addItem(data1, client)
+                }
+
+                client.heartBeat(client) // penguins heartbeat
             }
         }
     })
@@ -114,9 +125,7 @@ function login(data, client) {
                     client.disconnect()
                 } else {
                     if(key === loginKey) {
-                        console.log(data)
                         client.joinServer(results[0], client)
-                        console.log(data)
                     } else {
                         client.send_error(INCORRECT_PASSWORD)
                     }
