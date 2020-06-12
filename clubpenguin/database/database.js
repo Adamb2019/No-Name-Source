@@ -2,6 +2,7 @@ const mysql = require('mysql')
 const connection = require('./../../connections/database.json')
 
 const database = mysql.createConnection({
+    multipleStatements: true,
     host: connection.database.host,
     user: connection.database.user,
     password: connection.database.password,
@@ -10,7 +11,7 @@ const database = mysql.createConnection({
 
 database.connect(function(err) {
     if(err) {
-        database.destroy()
+        database.destory()
         throw err
     }
 });
