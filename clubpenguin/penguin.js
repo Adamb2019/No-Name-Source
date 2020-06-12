@@ -1,13 +1,16 @@
 const database = require('./database/database.js')
+const fs = require('fs')
 const worlds = require('../connections/worlds.json')
 const rooms = require('./handlers/crumbs/rooms.json')
 const items = require('./handlers/crumbs/items.json')
 const Room = require('./room.js')
 const rank = require('./plugins/rank.js')
+const inventory = require('./handlers/world/inventory.js')
 
 let penguins = {}
 let roomSystem = new Room()
 let ranking = new rank()
+let getInventory = new inventory()
 
 class penguin {
   constructor(socket) {
@@ -36,30 +39,6 @@ class penguin {
     this.socket.write('%xt%e%-1%' + error + '%' + '\0')
   }
 
-  playerStuff(result) { // for anything else when ur not sending the playerString
-    this.id = result.ID
-    this.username = result.Username
-    this.created = result.Created // doesnt return pLayers age rn
-    this.loginKey = result.LoginKey
-    this.approved = result.Approved
-    this.active = result.Active
-    this.safeChat = result.SafeChat
-    this.moderator = result.Moderator
-    this.banned = result.Banned
-    this.permaBan = result.PermaBan
-    this.color = result.Color
-    this.coins = result.Coins
-    this.head = result.Head
-    this.face = result.Face
-    this.neck = result.Neck
-    this.body = result.Body
-    this.hand = result.Hand
-    this.feet = result.Feet
-    this.photo = result.Photo
-    this.flag = result.Flag
-    this.rank = result.Rank
-  }
-
   playerString(result) { // for load player packet
     let playerArray = [ 
     this.id = result.ID,
@@ -80,7 +59,8 @@ class penguin {
     1, // is member
     this.rank = result.Rank * 146, // membership rank
     this.coins = result.Coins,
-    this.age = 182
+    this.age = 182,
+    this.moderator = result.Moderator
     ]
     return playerArray.join('|')
   }
@@ -90,30 +70,9 @@ class penguin {
     client.send_xt('js', -1, 0, 1, data.Moderator)
     // client.send_xt('gps', -1, '') pLayer stamps but rn stamps arent added
     client.send_xt('lp', -1, client.playerString(data), client.coins, 0, 1440, Math.floor(new Date() / 1000), client.age, 1000, 187, "", 7)
-    client.sendInventory(client)
+    getInventory.sendInventory(client)
     ranking.rankUpdate(client) // rank system
     roomSystem.joinRoomOnLogin(data, client)
-  }
-
-  getInventory(client) {
-    return new Promise(function(resolve, reject) {
-      let inventory = []
-      database.query(`SELECT * FROM inventory WHERE username = '${client.username}'`, function(err, result) {
-        Object.keys(result).forEach(function (item) {
-          let items = result[item].ItemID
-          inventory.push(items)
-        })
-        return resolve(inventory.join('%'))
-      })
-    })
-  }
-
-  sendInventory(client) {
-    this.getInventory(client).then(inventory => {
-      if(inventory) {
-        return client.send_xt('gi', -1, inventory)
-      }
-    })
   }
 
   addItem(data, client) {
@@ -126,6 +85,11 @@ class penguin {
         client.send_error(NOT_ENOUGH_COINS)
       } else {
         client.removeCoins(client, itemAmount)
+        fs.appendFile('./clubpenguin/logs/items.txt', `${client.username} has added item ${itemID} (${findItem.Label})\n`, function(err) {
+          if(err) {
+            console.log(err)
+          }
+        })
         database.query(`INSERT INTO inventory (PenguinID, Username, ItemID) VALUES ('${client.id}', '${client.username}', '${itemID}')`)
         return client.send_xt('ai', -1, itemID, client.coins)
       }
@@ -137,7 +101,12 @@ class penguin {
   addCoins(client, amount) {
     let coinsAdd = amount
     let newCoins = +client.coins + coinsAdd
-
+    
+    fs.appendFile('./clubpenguin/logs/coins.txt', `${client.username} has earned ${coinsAdd} coins\n`, function(err) {
+      if(err) {
+        console.log(err)
+      }
+    })
     database.query(`UPDATE penguins SET coins = '${newCoins}' WHERE username = '${client.username}'`)
     client.coins = newCoins
 
@@ -148,6 +117,11 @@ class penguin {
     let coinsRemove = amount
     let newCoins = client.coins - coinsRemove
 
+    fs.appendFile('./clubpenguin/logs/coins.txt', `${client.username} has removed ${coinsRemove} coins\n`, function(err) {
+      if(err) {
+        console.log(err)
+      }
+    })
     database.query(`UPDATE penguins SET coins = '${newCoins}' WHERE username = '${client.username}'`)
     client.coins = newCoins
 
