@@ -1,5 +1,6 @@
 const database = require('./database/database.js')
 const fs = require('fs')
+const database_manager = require('./database/database_manager.js')
 const worlds = require('../connections/worlds.json')
 const rooms = require('./handlers/crumbs/rooms.json')
 const items = require('./handlers/crumbs/items.json')
@@ -11,6 +12,7 @@ let penguins = {}
 let roomSystem = new Room()
 let ranking = new rank()
 let getInventory = new inventory()
+let getDatabase = new database_manager()
 
 class penguin {
   constructor(socket) {
@@ -107,10 +109,13 @@ class penguin {
         console.log(err)
       }
     })
-    database.query(`UPDATE penguins SET coins = '${newCoins}' WHERE username = '${client.username}'`)
-    client.coins = newCoins
-
-    return newCoins
+    // database.query(`UPDATE penguins SET coins = '${newCoins}' WHERE username = '${client.username}'`)
+    getDatabase.updatePenguinTable(newCoins, 'coins', 'username', client.username).then(exists => {
+      if(exists) {
+        client.coins = newCoins
+        return newCoins
+      }
+    })
   } 
 
   removeCoins(client, amount) {
@@ -122,10 +127,12 @@ class penguin {
         console.log(err)
       }
     })
-    database.query(`UPDATE penguins SET coins = '${newCoins}' WHERE username = '${client.username}'`)
-    client.coins = newCoins
-
-    return newCoins
+    getDatabase.updatePenguinTable(newCoins, 'coins', 'username', client.username).then(exists => {
+      if(exists) {
+        client.coins = newCoins
+        return newCoins
+      }
+    })
   }
 
   heartBeat(client) {
@@ -136,18 +143,24 @@ class penguin {
     let data1 = data.split('%')
     let colorID = data1[5]
 
-    database.query(`UPDATE penguins SET color = '${colorID}' WHERE username = '${client.username}'`)
-    client.color = colorID
-    return client.send_xt('upc', -1, client.id, colorID)
+    getDatabase.updatePenguinTable(colorID, 'color', 'username', client.username).then(exists => {
+      if(exists) {
+        client.color = colorID
+        return client.send_xt('upc', -1, client.id, colorID)
+      }
+    })
   }
 
   updateHead(data, client) {
     let data1 = data.split('%')
     let headID = data1[5]
 
-    database.query(`UPDATE penguins SET Head = '${headID}' WHERE username = '${client.username}'`)
-    client.head = headID
-    return client.send_xt('uph', -1, client.id, headID)
+    getDatabase.updatePenguinTable(headID, 'head', 'username', client.username).then(exists => {
+      if(exists) {
+        client.head = headID
+        return client.send_xt('uph', -1, client.id, headID)
+      }
+    })
   }
 
   
@@ -155,9 +168,12 @@ class penguin {
     let data1 = data.split('%')
     let faceID = data1[5]
 
-    database.query(`UPDATE penguins SET Face = '${faceID}' WHERE username = '${client.username}'`)
-    client.face = faceID
-    return client.send_xt('upf', -1, client.id, faceID)
+    getDatabase.updatePenguinTable(faceID, 'face', 'username', client.username).then(exists => {
+      if(exists) {
+        client.face = faceID
+        return client.send_xt('upf', -1, client.id, faceID)
+      }
+    })
   }
 
   
@@ -165,9 +181,12 @@ class penguin {
     let data1 = data.split('%')
     let neckID = data1[5]
 
-    database.query(`UPDATE penguins SET Neck = '${neckID}' WHERE username = '${client.username}'`)
-    client.neck = neckID
-    return client.send_xt('upn', -1, client.id, neckID)
+    getDatabase.updatePenguinTable(neckID, 'neck', 'username', client.username).then(exists => {
+      if(exists) {
+        client.neck = neckID
+        return client.send_xt('upn', -1, client.id, neckID)
+      }
+    })
   }
 
   
@@ -175,9 +194,12 @@ class penguin {
     let data1 = data.split('%')
     let bodyID = data1[5]
 
-    database.query(`UPDATE penguins SET Body = '${bodyID}' WHERE username = '${client.username}'`)
-    client.body = bodyID
-    return client.send_xt('upb', -1, client.id, bodyID)
+    getDatabase.updatePenguinTable(bodyID, 'body', 'username', client.username).then(exists => {
+      if(exists) {
+        client.body = bodyID
+        return client.send_xt('upb', -1, client.id, bodyID)
+      }
+    })
   }
 
     
@@ -185,9 +207,12 @@ class penguin {
     let data1 = data.split('%')
     let handID = data1[5]
 
-    database.query(`UPDATE penguins SET Hand = '${handID}' WHERE username = '${client.username}'`)
-    client.hand = handID
-    return client.send_xt('upa', -1, client.id, handID)
+    getDatabase.updatePenguinTable(handID, 'hand', 'username', client.username).then(exists => {
+      if(exists) {
+        client.hand = handID
+        return client.send_xt('upa', -1, client.id, handID)
+      }
+    })
   }
 
   
@@ -195,9 +220,12 @@ class penguin {
     let data1 = data.split('%')
     let feetID = data1[5]
 
-    database.query(`UPDATE penguins SET Feet = '${feetID}' WHERE username = '${client.username}'`)
-    client.feet = feetID
-    return client.send_xt('upe', -1, client.id, feetID)
+    getDatabase.updatePenguinTable(feetID, 'feet', 'username', client.username).then(exists => {
+      if(exists) {
+        client.feet = feetID
+        return client.send_xt('upe', -1, client.id, feetID)
+      }
+    })
   }
 
 
@@ -205,9 +233,12 @@ class penguin {
     let data1 = data.split('%')
     let backgroundID = data1[5]
 
-    database.query(`UPDATE penguins SET Photo = '${backgroundID}' WHERE username = '${client.username}'`)
-    client.photo = backgroundID
-    return client.send_xt('upp', -1, client.id, backgroundID)
+    getDatabase.updatePenguinTable(backgroundID, 'photo', 'username', client.username).then(exists => {
+      if(exists) {
+        client.photo = backgroundID
+        return client.send_xt('upp', -1, client.id, backgroundID)
+      }
+    })
   }
 
   
@@ -215,9 +246,12 @@ class penguin {
     let data1 = data.split('%')
     let pinID = data1[5]
 
-    database.query(`UPDATE penguins SET Flag = '${pinID}' WHERE username = '${client.username}'`)
-    client.flag = pinID
-    return client.send_xt('upl', -1, client.id, pinID)
+    getDatabase.updatePenguinTable(pinID, 'flag', 'username', client.username).then(exists => {
+      if(exists) {
+        client.flag = pinID
+        return client.send_xt('upl', -1, client.id, pinID)
+      }
+    })
   }
   
   gameOver(data, client) { // not working needs fixing
