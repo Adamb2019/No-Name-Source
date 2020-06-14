@@ -1,4 +1,8 @@
 const database = require('../database/database.js')
+const database_manager = require('../database/database_manager.js')
+const penguin = require('../penguin.js')
+
+let getDatabase = new database_manager()
 /* 
 91 - 3 months
 182 - 6 months
@@ -12,61 +16,82 @@ let year = 365
 
 class rank {
     rankUpdate(client) {
-        database.query(`SELECT * FROM penguins WHERE username = '${client.username}'`, function(err, results) {
-            if(results) {
+        getDatabase.getPenguinTable(client.username, 'username').then(exists => {
+            if(exists) {
                 let penguinAge = 91
-                let rank = results[0].Rank
-                if(penguinAge === threeMonths) {
-                    if(!rank === 1) {
-                        database.query(`UPDATE penguins SET Rank = '1' WHERE username = '${client.username}'`) // reset rank cause they cheated 
-                        client.disconnect()
+                let rank = exists[0].Rank
+                if(penguinAge === threeMonths || penguinAge > threeMonths && penguinAge < sixMonths) {
+                    if(!rank === '1') {
+                        getDatabase.updatePenguinTable('1', 'Rank', 'Username', client.username).then(exists => { // reset rank cause they cheated 
+                            if(exists) {
+                                client.disconnect()
+                            }
+                        })
                     } else {
                         if(rank === '1') {
-                            database.query(`UPDATE penguins SET Rank = '2' WHERE username = '${client.username}'`)
+                            getDatabase.updatePenguinTable('2', 'Rank', 'Username', client.username).then(exists => {
+                                if(exists) {
+                                    console.log(`Updated ${client.username}'s rank to 2`)
+                                }
+                            })
                         } else {
                             return false
                         }
                     }
                 }
-    
-                if(penguinAge === sixMonths) {
-                    if(!rank === 2) { 
-                        database.query(`UPDATE penguins SET Rank = '2' WHERE username = '${client.username}'`) // reset rank cause they cheated 
-                        client.disconnect()
+
+                if(penguinAge === sixMonths || penguinAge > sixMonths && penguinAge < nineMonths) {
+                    if(!rank === '2') {
+                        getDatabase.updatePenguinTable('2', 'Rank', 'Username', client.username).then(exists => { // reset rank cause they cheated 
+                            if(exists) {
+                                client.disconnect()
+                            }
+                        })
                     } else {
-                        if(rank === 2) {
-                            database.query(`UPDATE penguins SET Rank = '3' WHERE username = '${client.username}'`)
-                            console.log(`Updated ${client.username} to rank 3`)
+                        if(rank === '2') {
+                            getDatabase.updatePenguinTable('3', 'Rank', 'Username', client.username).then(exists => {
+                                if(exists) {
+                                    console.log(`Updated ${client.username}'s rank to 3`)
+                                }
+                            })
                         } else {
                             return false
                         }
                     }
                 }
-    
-                if(penguinAge === nineMonths || penguinAge > nineMonths) {
-                    if(!rank === 3) {
-                        database.query(`UPDATE penguins SET Rank = '3' WHERE username = '${client.username}'`) // reset rank cause they cheated 
-                        client.disconnect()
+
+                if(penguinAge === nineMonths || penguinAge > nineMonths && penguinAge < year) {
+                    if(!rank === '3') {
+                        getDatabase.updatePenguinTable('3', 'Rank', 'Username', client.username).then(exists => { // reset rank cause they cheated 
+                            if(exists) {
+                                client.disconnect()
+                            }
+                        })
                     } else {
-                        if(rank === 3) {
-                            database.query(`UPDATE penguins SET Rank = '4' WHERE username = '${client.username}'`)
-                            console.log(`Updated ${client.username} to rank 4`)
-                        } else {
-                            return false
+                        if(rank === '3') {
+                            getDatabase.updatePenguinTable('4', 'Rank', 'Username', client.username).then(exists => {
+                                if(exists) {
+                                    console.log(`Updated ${client.username}'s rank to 4`)
+                                }
+                            })
                         }
                     }
                 }
-    
+
                 if(penguinAge === year || penguinAge > year) {
-                    if(!rank === 4) {
-                        database.query(`UPDATE penguins SET Rank = '4' WHERE username = '${client.username}'`) // reset rank cause they cheated 
-                        client.disconnect()
+                    if(!rank === '4') {
+                        getDatabase.updatePenguinTable('4', 'Rank', 'Username', client.username).then(exists => { // reset rank cause they cheated 
+                            if(exists) {
+                                client.disconnect()
+                            }
+                        })
                     } else {
-                        if(rank === 4) {
-                            database.query(`UPDATE penguins SET Rank = '6' WHERE username = '${client.username}'`)
-                            console.log(`Updated ${client.username} to rank 6`)
-                        } else {
-                            return false
+                        if(rank === '4') {
+                            getDatabase.updatePenguinTable('6', 'Rank', 'Username', client.username).then(exists => {
+                                if(exists) {
+                                    console.log(`Updated ${client.username}'s rank to 6`)
+                                }
+                            })
                         }
                     }
                 }
