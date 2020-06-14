@@ -1,6 +1,7 @@
 const net = require('net')
 const parseString = require('xml2js').parseString
 const database = require('../../database/database.js')
+const database_manager = require('../../database/database_manager.js')
 const bcrypt = require('bcrypt')
 const fetch = require('node-fetch')
 const penguin = require('../../penguin.js')
@@ -9,6 +10,7 @@ const generateKey = require('../../crypto.js')
 const worlds = require('../../../connections/worlds.json')
 const errors = require('../../errors.js')
 
+let getDatabase = new database_manager()
 let penguinsOnline = []
 
 const server = net.createServer(function(connection) {
@@ -68,37 +70,41 @@ function login(data, client) {
             let username = result.msg.body[0].login[0].nick[0].toLowerCase()
             let password = result.msg.body[0].login[0].pword[0]
             let randomKey = generate.randomkey()
-
-            database.query(`SELECT * FROM penguins WHERE username = '${username}'`, async function(err, results) {
-                if(results.length < 1) {
+            getDatabase.getPenguinTable(username, 'username').then(async exists => {
+                if(exists.length < 1) {
                     console.log(`${username} failed to login as username doesnt exist`)
                     client.send_error(USERNAME_NOT_FOUND)
                 } else {
-                    let pass = results[0].Password
-                    let id = results[0].ID
+                    let pass = exists[0].Password
+                    let id = exists[0].ID
                     let compare = await bcrypt.compare(password, pass)
                     if(compare === false) {
                         console.log(`${username} failed to login as password doesnt match`)
                         client.send_error(INCORRECT_PASSWORD)
                     } else {
-                        if(results[0].Active === '0') {
+                        if(exists[0].Active === '0') {
                             client.send_error(ACCOUNT_NOT_ACTIVATED)
                         } else {
-                            if(results[0].PermaBan === '1') {
+                            if(exists[0].PermaBan === '1') {
                                 client.send_error(BAN_FOREVER)
                             } else {
                                 fetch('https://api.ipify.org?format=json')
                                 .then(res => res.json())
                                 .then(json => {
-                                    database.query(`SELECT * FROM ip_bans WHERE IPAddress = '${json.ip}'`, function(err, results1) {
-                                        if(results1.length >= 1) {
+                                    getDatabase.getIPBansTable(json.ip, 'IPAddress').then(exists1 => {
+                                        if(exists1.length >= 1) {
                                             client.disconnect()
                                         } else {
-                                            database.query(`UPDATE penguins SET LoginKey = '${randomKey}' WHERE username = '${username}'`)
-                                            database.query(`SELECT * FROM penguins WHERE username = '${username}'`, function(err, results2) {
-                                                let loginKey = results2[0].LoginKey
-                                                database.query(`INSERT INTO Login (PenguinID, Username, IPAddress) VALUES ('${results2[0].ID}', '${results2[0].Username}', '${json.ip}')`)
-                                                client.send_xt('l', -1, id, loginKey, '', '100,5')
+                                            getDatabase.updatePenguinTable(randomKey, 'LoginKey', 'username', username).then(exists2 => {
+                                                if(exists2) {
+                                                    getDatabase.getPenguinTable(username, 'username').then(exists3 => {
+                                                        if(exists3.length >= 1) {
+                                                            let loginKey = exists3[0].LoginKey
+                                                            database.query(`INSERT INTO Login (PenguinID, Username, IPAddress) VALUES ('${exists3[0].ID}', '${exists3[0].Username}', '${json.ip}')`)
+                                                            client.send_xt('l', -1, id, loginKey, '', '100,5')
+                                                        }
+                                                    })
+                                                }
                                             })
                                         }
                                     })

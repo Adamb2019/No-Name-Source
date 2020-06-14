@@ -4,9 +4,11 @@ const penguin = require('../../penguin.js')
 const handleCommands = require('../../plugins/commands.js')
 const Room = require('../../room.js')
 const database = require('../../database/database.js')
+const database_manager = require('../../database/database_manager.js')
 const errors = require('../../errors.js')
 const worlds = require('../../../connections/worlds.json')
 
+let getDatabase = new database_manager()
 let penguinsOnline = []
 
 const server = net.createServer(function(connection) {
@@ -36,7 +38,7 @@ const server = net.createServer(function(connection) {
                 }
 
                 if(data1.indexOf("j#jr") >= 0) { // jadd user to room
-                    roomSystem.addUser(data1, client)
+                    roomSystem.addUser(data1, client, roomSystem)
                 }
 
                 if(data1.indexOf("i#ai") >= 0) { // if player is adding an item
@@ -84,11 +86,15 @@ const server = net.createServer(function(connection) {
                 } 
 
                 if(data1.indexOf("!playersonline") >= 0) { // players online command
-                    commands.online(data1, client, penguinsOnline.length)
+                    commands.playersOnline(data1, client, penguinsOnline.length)
                 }
 
                 if(data1.indexOf("!ai") >= 0) { // add item
                     commands.addItem(data1, client)
+                }
+
+                if(data1.indexOf("!ac") >= 0) {
+                    commands.coins(data1, client)
                 }
 
                 client.heartBeat(client) // penguins heartbeat
@@ -119,15 +125,17 @@ function login(data, client) {
             let username = result.msg.body[0].login[0].nick[0].toLowerCase()
             let password = result.msg.body[0].login[0].pword[0]
             let key = password.substr(32)
-            database.query(`SELECT * FROM penguins WHERE Username = '${username}'`, async function(err, results) {
-                let loginKey = results[0].LoginKey
-                if(results[0].LoginKey === "") {
-                    client.disconnect()
-                } else {
-                    if(key === loginKey) {
-                        client.joinServer(results[0], client)
+            getDatabase.getPenguinTable(username, 'username').then(exists => {
+                if(exists.length >= 1) {
+                    let loginKey = exists[0].LoginKey
+                    if(loginKey === "") {
+                        client.disconnect()
                     } else {
-                        client.send_error(INCORRECT_PASSWORD)
+                        if(key === loginKey) {
+                            client.joinServer(exists[0], client)
+                        } else {
+                            client.send_error(INCORRECT_PASSWORD)
+                        }
                     }
                 }
             })
