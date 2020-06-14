@@ -1,35 +1,47 @@
 const net = require('net')
 const parseString = require('xml2js').parseString
 const penguin = require('../../penguin.js')
+const code = require('./code.js')
 const errros = require('../../errors.js')
 const database = require('../../database/database.js')
+const database_manager = require('../../database/database_manager.js')
 const connections = require('../../../connections/worlds.json')
+
+let getDatabase = new database_manager()
 
 const server = net.createServer(function(connection) {
     let client = new penguin(connection)
-    console.log('Penguin connected to redemption server')
+    let redeemCode = new code()
+    console.log(client.username)
+    console.log('[Info] Penguin connected to redemption server')
 
     connection.on('end', function() {
-        console.log('Penguin disconnected from redemption server')
+        console.log('[Info] Penguin disconnected from redemption server')
     })
 
     connection.on('data', function(data) {
         let data1 = data.toString().split('\0')[0]
-        console.log(`received ${data1}`)
+        console.log(`[Info] INCOMING XML: ${data1}`)
         if(verChk(data1)) {
             client.send_xml('<msg t="sys"><body action="apiOK" r="0"></body></msg>')
+            console.log(`OUTGOING XML: <msg t="sys"><body action="apiOK" r="0"></body></msg>`)
         } else {
             if(rndK(data1)) {
                 client.send_xml('<msg t="sys"><body action="rndK" r="-1"><k>nodeJS</k></body></msg>')
+                console.log(`OUTGOING XML: <msg t="sys"><body action="rndK" r="-1"><k>nodeJS</k></body></msg>`)
             } else {
                 accessRedemption(data1, client)
+                console.log(data1)
+                if(data1.indexOf("rsc") >= 0) {
+                    redeemCode.checkCode(data1, client)
+                }
             }
         }
     })
 });
 
 server.listen(connections.redemption.port, function() {
-    console.log('redemption server listening on port 9000')
+    console.log('[Server] Redemption server listening on port 9000')
 });
 
 function verChk(data) {
@@ -51,23 +63,16 @@ function accessRedemption(data, client) {
             let password = result.msg.body[0].login[0].pword[0]
             let key = password.substr(32)
             console.log(key)
-            database.query(`SELECT * FROM penguins WHERE username = '${username}'`, async function(err, results) {
-                let loginKey = results[0].LoginKey
-                console.log(loginKey)
-                if(key !== loginKey) {
-                    database.query(`UPDATE penguins SET LoginKey = '' where Username = '${username}'`)
-                    client.disconnect()
-                    console.log('didnt match')
-                } else {
-                    if(loginKey === "") {
-                        client.disconnect()
-                        console.log('empty')
-                    } else {
-                        client.send_xt('rjs')
-                        console.log('worked')
-                    }
-                }
+            getDatabase.getPenguinTable(username, 'nickname').then(exists => {
+                if(exists) {
+                    let loginKey = results[0].LoginKey
+                    client.send_error(101)
+                }  
             })
         }
     })
 }
+
+// first book received %xt%red%rgbq%-1%1%
+// second book received %xt%red%rgbq%-1%2%
+// recieve code %xt%red%rsc%-1%ADDDDDDDDDDDDD%

@@ -1,5 +1,4 @@
 const database = require('../../database/database.js')
+const database_manager = require('../../database/database_manager.js')
 
-database.query(`SELECT * FROM book WHERE book = '${book}'`, async function(err, results) { // book is yet to be defined
-
-});
+let getDatabase = new database_manager()
