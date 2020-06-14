@@ -1,6 +1,9 @@
 const fs = require('fs')
 const database = require('../database/database.js')
+const database_manager = require('../database/database_manager.js')
 const items = require('../handlers/crumbs/items.json')
+
+let getDatabase = new database_manager()
 
 let prefix = "!"
 
@@ -37,9 +40,9 @@ class handleCommands {
                     if(client.coins < itemAmount) {
                         client.send_error(NOT_ENOUGH_COINS)
                     } else {
-                        database.query(`SELECT * FROM inventory WHERE ItemID = '${itemID}'`, function(err, results) {
-                            if(results.length >= 1) {
-                                let username = results[0].Username
+                        getDatabase.getInventoryTable(itemID, 'ItemID').then(exists => {
+                            if(exists >= 1) {
+                                let username = exists[0].Username
                                 if(username === client.username.toString()) {
                                     client.send_error(400)
                                     return false
@@ -59,18 +62,6 @@ class handleCommands {
                 } else {
                     return client.send_error(ITEM_DOES_NOT_EXIST)
                 }
-            } else {
-                fs.appendFile('./clubpenguin/logs/items.txt', `${client.username} tried to add item ${itemID} (${findItem.Label}) using the AI command while the penguin is not a moderator\n`, function(err) {
-                    if(err) {
-                        console.log(err)
-                    }
-                })
-                fs.appendFile('./clubpenguin/logs/commands.txt', `${client.username} tried to use the command ${prefix}ai while the penguin is not a moderator\n`, function(err) {
-                    if(err) {
-                        console.log(err)
-                    }
-                })
-                console.log(`${client.username} tried to add an item while not being a moderator`)
             }
         } catch {
             console.log(`oooooof an error has happened`)
