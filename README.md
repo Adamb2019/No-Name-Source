@@ -1,21 +1,9 @@
 # No-Name-Source
 Club penguin source written in Node JS
 
-To run the server just run Node .
+Run npm install
 
-Required Modules 
-
-Net - npm install net
-
-Bcrypt - npm install bcrypt
-
-Crypto - npm install crypto
-
-Mysql - npm install mysql
-
-Xml2js - npm install xml2js
-
-Node Fetch - npm install node-fetch
+then run Node .
 
 default login is Adam - password
 
