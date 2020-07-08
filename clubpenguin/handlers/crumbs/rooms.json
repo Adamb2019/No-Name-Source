@@ -8,7 +8,7 @@
             "Music_Id": 950,
             "Is_Member": 0,
             "Path": "town.swf",
-            "Max_Users": 1,
+            "Max_Users": 80,
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
