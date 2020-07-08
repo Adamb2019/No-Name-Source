@@ -1,7 +1,6 @@
 const rooms = require('./handlers/crumbs/rooms.json')
 const database_manager = require('./database/database_manager.js')
 const penguin = require('./penguin.js')
-const roomData = require('../connections/roomData.json')
 
 let penguins = []
 let getDatabase = new database_manager()
