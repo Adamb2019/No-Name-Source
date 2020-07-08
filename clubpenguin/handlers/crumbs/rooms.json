@@ -8,7 +8,7 @@
             "Music_Id": 950,
             "Is_Member": 0,
             "Path": "town.swf",
-            "Max_Users": 80,
+            "Max_Users": 1,
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
@@ -573,7 +573,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Gold Mine"
+            "Short_Room_Name": "Gold_Mine"
         },
         "814": {
             "Room_Id": 814,
@@ -629,7 +629,7 @@
             "Jump_Enabled": true,
             "Jump_Disabled": false,
             "Required_Item": null,
-            "Short_Room_Name": "Bonus Room"
+            "Short_Room_Name": "Party1"
         },
         "852": {
             "Room_Id": 852,
@@ -643,7 +643,7 @@
             "Jump_Enabled": true,
             "Jump_Disabled": false,
             "Required_Item": null,
-            "Short_Room_Name": "Bonus Room"
+            "Short_Room_Name": "Party2"
         },
         "853": {
             "Room_Id": 853,
@@ -657,7 +657,7 @@
             "Jump_Enabled": true,
             "Jump_Disabled": false,
             "Required_Item": null,
-            "Short_Room_Name": "Sector 1"
+            "Short_Room_Name": "Party3"
         },
         "854": {
             "Room_Id": 854,
@@ -671,7 +671,7 @@
             "Jump_Enabled": true,
             "Jump_Disabled": false,
             "Required_Item": null,
-            "Short_Room_Name": "Sector 1"
+            "Short_Room_Name": "Party4"
         },
         "855": {
             "Room_Id": 855,
@@ -685,7 +685,7 @@
             "Jump_Enabled": true,
             "Jump_Disabled": false,
             "Required_Item": null,
-            "Short_Room_Name": "Sector 2"
+            "Short_Room_Name": "Party5"
         },
         "856": {
             "Room_Id": 856,
@@ -699,7 +699,7 @@
             "Jump_Enabled": true,
             "Jump_Disabled": false,
             "Required_Item": null,
-            "Short_Room_Name": "Secret Tunnel"
+            "Short_Room_Name": "Party6"
         },
         "857": {
             "Room_Id": 857,
@@ -713,7 +713,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Secret HQ"
+            "Short_Room_Name": "Party7"
         },
         "858": {
             "Room_Id": 858,
@@ -727,7 +727,7 @@
             "Jump_Enabled": true,
             "Jump_Disabled": false,
             "Required_Item": null,
-            "Short_Room_Name": "Tunnel"
+            "Short_Room_Name": "Party8"
         },
         "859": {
             "Room_Id": 859,
@@ -741,7 +741,7 @@
             "Jump_Enabled": true,
             "Jump_Disabled": false,
             "Required_Item": null,
-            "Short_Room_Name": "Ghost Lab"
+            "Short_Room_Name": "Party9"
         },
         "860": {
             "Room_Id": 860,
@@ -755,7 +755,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party10"
         },
         "861": {
             "Room_Id": 861,
@@ -769,7 +769,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party11"
         },
         "862": {
             "Room_Id": 862,
@@ -783,7 +783,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party12"
         },
         "863": {
             "Room_Id": 863,
@@ -797,7 +797,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party13"
         },
         "864": {
             "Room_Id": 864,
@@ -811,7 +811,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party14"
         },
         "865": {
             "Room_Id": 865,
@@ -825,7 +825,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party15"
         },
         "866": {
             "Room_Id": 866,
@@ -839,7 +839,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party16"
         },
         "867": {
             "Room_Id": 867,
@@ -853,7 +853,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party17"
         },
         "868": {
             "Room_Id": 868,
@@ -867,7 +867,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "",
+            "Short_Room_Name": "Party18",
             "pin_id": 7258,
             "pin_x": 693,
             "pin_y": 217
@@ -884,7 +884,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party19"
         },
         "870": {
             "Room_Id": 870,
@@ -898,7 +898,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party20"
         },
         "871": {
             "Room_Id": 871,
@@ -912,7 +912,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party21"
         },
         "872": {
             "Room_Id": 872,
@@ -926,7 +926,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party22"
         },
         "873": {
             "Room_Id": 873,
@@ -940,7 +940,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party23"
         },
         "874": {
             "Room_Id": 874,
@@ -954,7 +954,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party24"
         },
         "875": {
             "Room_Id": 875,
@@ -968,7 +968,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party25"
         },
         "876": {
             "Room_Id": 876,
@@ -982,7 +982,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party26"
         },
         "877": {
             "Room_Id": 877,
@@ -996,7 +996,7 @@
             "Jump_Enabled": true,
             "Jump_Disabled": false,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party27"
         },
         "878": {
             "Room_Id": 878,
@@ -1010,7 +1010,7 @@
             "Jump_Enabled": true,
             "Jump_Disabled": false,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party28"
         },
         "890": {
             "Room_Id": 890,
@@ -1024,7 +1024,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Party99"
         },
         "891": {
             "Room_Id": 891,
@@ -1038,7 +1038,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "partysolo1"
+            "Short_Room_Name": "Party_Solo_1"
         },
         "892": {
             "Room_Id": 892,
@@ -1052,7 +1052,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "partysolo2"
+            "Short_Room_Name": "Party_Solo_2"
         },
         "898": {
             "Room_Id": 898,
@@ -1066,7 +1066,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Sound Room"
+            "Short_Room_Name": "Sound_Room"
         },
         "899": {
             "Room_Id": 899,
@@ -1136,7 +1136,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Hydro Hopper"
+            "Short_Room_Name": "Hydro_Hopper"
         },
         "904": {
             "Room_Id": 904,
@@ -1150,7 +1150,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Ice Fishing"
+            "Short_Room_Name": "Ice_Fishing"
         },
         "905": {
             "Room_Id": 905,
@@ -1164,7 +1164,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Cart Surfer"
+            "Short_Room_Name": "Cart_Surfer"
         },
         "999": {
             "Room_Id": 999,
@@ -1178,7 +1178,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Sled Racing"
+            "Short_Room_Name": "Sled_Racing"
         },
         "906": {
             "Room_Id": 906,
@@ -1192,7 +1192,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Jet Pack"
+            "Short_Room_Name": "Jet_Pack"
         },
         "907": {
             "Room_Id": 907,
@@ -1206,7 +1206,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "EPF Only"
+            "Short_Room_Name": "Mission1"
         },
         "908": {
             "Room_Id": 908,
@@ -1220,7 +1220,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "EPF Only"
+            "Short_Room_Name": "Mission2"
         },
         "909": {
             "Room_Id": 909,
@@ -1234,7 +1234,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Thin Ice"
+            "Short_Room_Name": "Thin_Ice"
         },
         "910": {
             "Room_Id": 910,
@@ -1262,7 +1262,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "EPF Only"
+            "Short_Room_Name": "Mission3"
         },
         "912": {
             "Room_Id": 912,
@@ -1290,7 +1290,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "EPF Only"
+            "Short_Room_Name": "Mission4"
         },
         "914": {
             "Room_Id": 914,
@@ -1304,7 +1304,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "EPF Only"
+            "Short_Room_Name": "Mission5"
         },
         "915": {
             "Room_Id": 915,
@@ -1318,7 +1318,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "EPF Only"
+            "Short_Room_Name": "Mission6"
         },
         "916": {
             "Room_Id": 916,
@@ -1332,7 +1332,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Aqua Grabber"
+            "Short_Room_Name": "Aqua_Grabber"
         },
         "917": {
             "Room_Id": 917,
@@ -1346,7 +1346,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Book1"
         },
         "918": {
             "Room_Id": 918,
@@ -1360,7 +1360,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Book2"
         },
         "919": {
             "Room_Id": 919,
@@ -1374,7 +1374,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Book3"
         },
         "920": {
             "Room_Id": 920,
@@ -1388,7 +1388,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "EPF Only"
+            "Short_Room_Name": "Mission7"
         },
         "921": {
             "Room_Id": 921,
@@ -1402,7 +1402,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "EPF Only"
+            "Short_Room_Name": "Mission8"
         },
         "922": {
             "Room_Id": 922,
@@ -1416,7 +1416,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "EPF Only"
+            "Short_Room_Name": "Mission9"
         },
         "923": {
             "Room_Id": 923,
@@ -1444,7 +1444,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Game24"
         },
         "925": {
             "Room_Id": 925,
@@ -1458,7 +1458,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Game25"
         },
         "926": {
             "Room_Id": 926,
@@ -1486,7 +1486,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "EPF Only"
+            "Short_Room_Name": "Mission11"
         },
         "941": {
             "Room_Id": 941,
@@ -1500,7 +1500,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Puffle Soaker"
+            "Short_Room_Name": "Puffle_Soaker"
         },
         "942": {
             "Room_Id": 942,
@@ -1514,7 +1514,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Balloon Pop"
+            "Short_Room_Name": "Balloon_Pop"
         },
         "943": {
             "Room_Id": 943,
@@ -1528,7 +1528,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Ring the Bell"
+            "Short_Room_Name": "Ring_the_Bell"
         },
         "944": {
             "Room_Id": 944,
@@ -1556,7 +1556,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Memory Game"
+            "Short_Room_Name": "Memory_Game"
         },
         "946": {
             "Room_Id": 946,
@@ -1570,7 +1570,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Puffle Paddle"
+            "Short_Room_Name": "Puffle_Paddle"
         },
         "947": {
             "Room_Id": 947,
@@ -1584,7 +1584,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Puffle Shuffle"
+            "Short_Room_Name": "Puffle_Shuffle"
         },
         "948": {
             "Room_Id": 948,
@@ -1598,7 +1598,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Spin To Win"
+            "Short_Room_Name": "Spin_To_Win"
         },
         "949": {
             "Room_Id": 949,
@@ -1612,7 +1612,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Puffle Rescue"
+            "Short_Room_Name": "Puffle_Rescue"
         },
         "950": {
             "Room_Id": 950,
@@ -1626,7 +1626,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "EPF Only"
+            "Short_Room_Name": "System_Defender"
         },
         "951": {
             "Room_Id": 951,
@@ -1640,7 +1640,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Ninja Training"
+            "Short_Room_Name": "Ninja_Training"
         },
         "952": {
             "Room_Id": 952,
@@ -1654,7 +1654,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Dance Contest"
+            "Short_Room_Name": "Dance_Contest"
         },
         "953": {
             "Room_Id": 953,
@@ -1668,7 +1668,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Fire Training"
+            "Short_Room_Name": "Fire_Training"
         },
         "954": {
             "Room_Id": 954,
@@ -1682,7 +1682,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Water Training"
+            "Short_Room_Name": "Water_Training"
         },
         "955": {
             "Room_Id": 955,
@@ -1696,7 +1696,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Puffle Launch"
+            "Short_Room_Name": "Puffle_Launch"
         },
         "956": {
             "Room_Id": 956,
@@ -1710,7 +1710,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Bits & Bolts"
+            "Short_Room_Name": "Bits_&_Bolts"
         },
         "957": {
             "Room_Id": 957,
@@ -1724,7 +1724,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Rollerscape"
         },
         "958": {
             "Room_Id": 958,
@@ -1738,7 +1738,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Scorn_Battle"
         },
         "959": {
             "Room_Id": 959,
@@ -1766,7 +1766,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Ice_Jam"
         },
         "961": {
             "Room_Id": 961,
@@ -1794,7 +1794,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Party Game"
+            "Short_Room_Name": "Party_Game"
         },
         "963": {
             "Room_Id": 963,
@@ -1822,7 +1822,7 @@
             "Jump_Enabled": true,
             "Jump_Disabled": false,
             "Required_Item": null,
-            "Short_Room_Name": ""
+            "Short_Room_Name": "Igloo_Card"
         },
         "995": {
             "Room_Id": 995,
@@ -1878,7 +1878,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Card Jitsu"
+            "Short_Room_Name": "Card_Jitsu"
         },
         "1100": {
             "Room_Id": 1100,
@@ -1892,7 +1892,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "My Penguin"
+            "Short_Room_Name": "My_Penguin"
         },
         "1104": {
             "Room_Id": 1104,
@@ -1906,7 +1906,7 @@
             "Jump_Enabled": false,
             "Jump_Disabled": true,
             "Required_Item": null,
-            "Short_Room_Name": "Gold Mine"
+            "Short_Room_Name": "Gold_Mine"
         },
         "112": {
             "Room_Id": 112,
