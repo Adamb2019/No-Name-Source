@@ -1,6 +1,7 @@
 const rooms = require('./handlers/crumbs/rooms.json')
 const database_manager = require('./database/database_manager.js')
 const penguin = require('./penguin.js')
+const fs = require('fs')
 
 let penguins = []
 let getDatabase = new database_manager()
@@ -19,6 +20,11 @@ class Room {
             if(roomCount < maxPlayers) {
               penguins.push(client)
               this.removeUser(client)
+              fs.appendFile('./clubpenguin/logs/rooms.txt', `${client.username} has joined room ${roomName} (${randomRoom})\n`, function(err) {
+                if(err) {
+                  console.log(err)
+                }
+              })
               await getDatabase.updatePenguinTable(randomRooms, 'Room', 'Username', client.username).then(exists1 => {
                 if(exists1) {
                   return true
@@ -69,6 +75,11 @@ class Room {
                     client.send_xt('jr', -1, roomID, client.playerString(exists[0]))
                     let roomCount = exists[0][roomName] =+ 1
                     this.removeUser(client)
+                    fs.appendFile('./clubpenguin/logs/rooms.txt', `${client.username} has joined room ${roomName} (${roomID})\n`, function(err) {
+                      if(err) {
+                        console.log(err)
+                      }
+                    })
                     await getDatabase.updateRoomTable(roomCount, roomName, 'ID', '1').then(exists3 => {
                       if(exists3) {
                         return true
