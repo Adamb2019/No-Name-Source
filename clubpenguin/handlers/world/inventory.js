@@ -1,4 +1,3 @@
-const database = require('../../database/database.js')
 const database_manager = require('../../database/database_manager.js')
 const items = require('../crumbs/items.json')
 
