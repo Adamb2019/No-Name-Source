@@ -3,19 +3,21 @@ const parseString = require('xml2js').parseString
 const penguin = require('../../penguin.js')
 const handleCommands = require('../../plugins/commands.js')
 const Room = require('../../room.js')
+const igloo = require('../world/igloo.js')
 const database = require('../../database/database.js')
 const database_manager = require('../../database/database_manager.js')
 const errors = require('../../errors.js')
 const worlds = require('../../../connections/worlds.json')
 
-let getDatabase = new database_manager()
 let penguinsOnline = []
+let getDatabase = new database_manager()
 
 const server = net.createServer(function(connection) {
     let client = new penguin(connection)
     console.log(connection)
     let commands = new handleCommands()
     let roomSystem = new Room()
+    let handleIgloo = new igloo()
     penguinsOnline.push(connection)
     console.log(`[Info] Penguin connected to the world server || Their are currently ${penguinsOnline.length} penguin's online`)
 
@@ -89,14 +91,22 @@ const server = net.createServer(function(connection) {
                     commands.playersOnline(data1, client, penguinsOnline.length)
                 }
 
-                if(data1.indexOf("!ai") >= 0) { // add item
+                if(data1.indexOf("!ai") >= 0) { // add item + ai command
                     commands.addItem(data1, client)
                 }
 
-                if(data1.indexOf("!ac") >= 0) {
+                if(data1.indexOf("!ac") >= 0) { // add coins command
                     commands.coins(data1, client)
                 }
 
+                if(data1.indexOf("!jr") >= 0) { // join room command
+                    commands.joinRoom(data1, client)
+                }
+
+                if(data1.indexOf("g#gm") >= 0) { // get player igloo
+                    handleIgloo.handleGetIgloo(data1, client)
+                }
+                
                 client.heartBeat(client) // penguins heartbeat
             }
         }
