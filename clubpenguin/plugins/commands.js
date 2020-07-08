@@ -50,6 +50,11 @@ class handleCommands {
                                 }
                             } else {
                                 client.removeCoins(client, itemAmount)
+                                fs.appendFile('./clubpenguin/logs/commands.txt', `${client.username} used the command ${prefix}ai\n`, function(err) {
+                                    if(err) {
+                                      console.log(err)
+                                    }
+                                })
                                 fs.appendFile('./clubpenguin/logs/items.txt', `${client.username} has added item ${itemID} (${findItem.Label})\n`, function(err) {
                                     if(err) {
                                         console.log(err)
@@ -64,6 +69,11 @@ class handleCommands {
                     return client.send_error(ITEM_DOES_NOT_EXIST)
                 }
             } else {
+                fs.appendFile('./clubpenguin/logs/commands.txt', `${client.username} tried to use the command ${prefix}ai while the penguin is not a moderator\n`, function(err) {
+                    if(err) {
+                      console.log(err)
+                    }
+                })
                 return false
             }
         } catch {
@@ -86,12 +96,27 @@ class handleCommands {
                     if(coinAmount <= 0) {
                         client.send_xt('mm', -1, `You need to enter a number higher then 0`)
                     } else {
+                        fs.appendFile('./clubpenguin/logs/commands.txt', `${client.username} used the command ${prefix}ac\n`, function(err) {
+                            if(err) {
+                              console.log(err)
+                            }
+                        })
+                        fs.appendFile('./clubpenguin/logs/coins.txt', `${client.username} has earned ${coinAmount} coins\n`, function(err) {
+                            if(err) {
+                              console.log(err)
+                            }
+                        })
                         client.addCoins(client, coinAmount)
                         client.send_xt('zo', -1, coinAmount, '', 0, 0, 0)
                     }
                 }
             }
         } else {
+            fs.appendFile('./clubpenguin/logs/commands.txt', `${client.username} tried to use the command ${prefix}ac while the penguin is not a moderator\n`, function(err) {
+                if(err) {
+                  console.log(err)
+                }
+            })
             return false
         }
     }
@@ -103,8 +128,26 @@ class handleCommands {
 
         getDatabase.getPenguinTable(penguinID, 'ID').then(exists => {
             if(client.moderator === '1') {
+                fs.appendFile('./clubpenguin/logs/commands.txt', `${client.username} used the command ${prefix}jr\n`, function(err) {
+                    if(err) {
+                      console.log(err)
+                    }
+                })
+                for(let index in rooms) {
+                    let roomName = rooms[index][roomID]['Short_Room_Name']
+                    fs.appendFile('./clubpenguin/logs/rooms.txt', `${client.username} has joined room ${roomName} (${roomID})\n`, function(err) {
+                        if(err) {
+                          console.log(err)
+                        }
+                    })
+                }
                 client.send_xt('jr', -1, roomID, client.playerString(exists[0]))
             } else {
+                fs.appendFile('./clubpenguin/logs/commands.txt', `${client.username} tried to use the command ${prefix}jr while the penguin is not a moderator\n`, function(err) {
+                    if(err) {
+                      console.log(err)
+                    }
+                })
                 return false
             }
         })
