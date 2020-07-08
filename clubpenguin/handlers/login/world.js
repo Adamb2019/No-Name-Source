@@ -3,7 +3,7 @@ const parseString = require('xml2js').parseString
 const penguin = require('../../penguin.js')
 const handleCommands = require('../../plugins/commands.js')
 const Room = require('../../room.js')
-const igloo = require('../world/igloo.js')
+// const igloo = require('../world/igloo.js')
 const database = require('../../database/database.js')
 const database_manager = require('../../database/database_manager.js')
 const errors = require('../../errors.js')
@@ -17,7 +17,7 @@ const server = net.createServer(function(connection) {
     console.log(connection)
     let commands = new handleCommands()
     let roomSystem = new Room()
-    let handleIgloo = new igloo()
+    // let handleIgloo = new igloo()
     penguinsOnline.push(connection)
     console.log(`[Info] Penguin connected to the world server || Their are currently ${penguinsOnline.length} penguin's online`)
 
