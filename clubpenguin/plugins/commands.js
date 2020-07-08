@@ -2,6 +2,7 @@ const fs = require('fs')
 const database = require('../database/database.js')
 const database_manager = require('../database/database_manager.js')
 const items = require('../handlers/crumbs/items.json')
+const rooms = require('../handlers/crumbs/rooms.json')
 
 let getDatabase = new database_manager()
 
@@ -62,6 +63,8 @@ class handleCommands {
                 } else {
                     return client.send_error(ITEM_DOES_NOT_EXIST)
                 }
+            } else {
+                return false
             }
         } catch {
             console.log(`oooooof an error has happened`)
@@ -91,6 +94,20 @@ class handleCommands {
         } else {
             return false
         }
+    }
+
+    joinRoom(data, client) {
+        let data1 = data.split('%')
+        let roomID = data1[6].substr(4)
+        let penguinID = data1[5]
+
+        getDatabase.getPenguinTable(penguinID, 'ID').then(exists => {
+            if(client.moderator === '1') {
+                client.send_xt('jr', -1, roomID, client.playerString(exists[0]))
+            } else {
+                return false
+            }
+        })
     }
 }
 
