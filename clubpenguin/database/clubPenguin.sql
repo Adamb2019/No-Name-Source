@@ -47,11 +47,24 @@ CREATE TABLE `penguins` (
     `Photo` text NOT NULL DEFAULT 0 COMMENT 'Background Item',
     `Flag` text NOT NULL DEFAULT 0 COMMENT 'Pin Item',
     `Rank` text NOT NULL DEFAULT 0 COMMENT 'Membership Rank',
+    `Room` text NOT NULL DEFAULT 0 COMMENT 'Current Room',
     PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COMMENT='penguins';
 
 INSERT INTO `penguins` (`ID`, `Username`, `Nickname`, `Password`, `Email`, `Created`, `LoginKey`, `Approved`, `Active`, `SafeChat`, `Moderator`, `Banned`, `PermaBan`, `Color`, `Coins`, `Head`, `Face`, `Neck`, `Body`, `Hand`, `Feet`, `Photo`, `Flag`, `Rank`) VALUES
 (1, 'Adam', 'adam', '$2b$12$XRECcqgjoQ70vjw9XugPW.5uOZ6cB6AiFJP0xY/AOfqS7BFaZMUJe', 'Adam@gmail.com', '2020-06-08 23:44:07', '78d6d71da776e46d20b5f7481cb40d81c9fac8a2', '0', '1', '0', '0', '0', '0', '5', '9999', '414', '0', '173', '221', '0', '352', '959', '566', '6');
+
+DROP TABLE IF EXISTS `Igloo`;
+CREATE TABLE `Igloo` (
+    `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Number of Igloos',
+    `PenguinID` text NOT NULL COMMENT 'Penguin ID',
+    `Type` text NOT NULL DEFAULT 0 COMMENT 'Igloo Type',
+    `Music` text NOT NULL DEFAULT 0 COMMENT 'Igloo Music',
+    `Floor` text NOT NULL DEFAULT 0 COMMENT 'Igloo Floor',
+    `Furniture` text NOT NULL DEFAULT 0 COMMENT 'Igloo Furniture',
+    `Locked` text NOT NULL DEFAULT 1 COMMENT 'Is Igloo Locked',
+    PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COMMENT='Penguin Igloos';
 
 DROP TABLE IF EXISTS `Login`;
 CREATE TABLE `Login` (
@@ -97,3 +110,57 @@ CREATE TABLE `Penguin_Redemption` (
 
 INSERT INTO `Penguin_Redemption` (`Username`, `Code`) VALUES
 ('Adam', 'FIRSTCODETEST');
+
+DROP TABLE IF EXISTS `Rooms`;
+CREATE TABLE `Rooms` (
+    `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Number of tables',
+    `Town` text NOT NULL DEFAULT 0 COMMENT 'Town Center',
+    `Coffee_Shop` text NOT NULL DEFAULT 0 COMMENT 'Coffee Shop',
+    `Book_Room` text NOT NULL DEFAULT 0 COMMENT 'Book Room',
+    `Night Club` text NOT NULL DEFAULT 0 COMMENT 'Dance Club',
+    `Arcade` text NOT NULL DEFAULT 0 COMMENT 'Arcade',
+    `Clothes_Shop` text NOT NULL DEFAULT 0 COMMENT 'Clothes Shop',
+    `Ski_Village` text NOT NULL DEFAULT 0 COMMENT 'Ski Village',
+    `Sports_Shop` text NOT NULL DEFAULT 0 COMMENT 'Sports Shop',
+    `EPF_Only` text NOT NULL DEFAULT 0 COMMENT 'EPF Room',
+    `Ski_Lodge` text NOT NULL DEFAULT 0 COMMENT 'Ski Lodge',
+    `Attic` text NOT NULL DEFAULT 0 COMMENT 'Attic',
+    `Ski_Hill` text NOT NULL DEFAULT 0 COMMENT 'Ski Hill',
+    `Plaza` text NOT NULL DEFAULT 0 COMMENT 'Plaza',
+    `Pet_Shop` text NOT NULL DEFAULT 0 COMMENT 'Pet Shop',
+    `Dojo` text NOT NULL DEFAULT 0 COMMENT 'Dojo',
+    `Dojo_Front` text NOT NULL DEFAULT 0 COMMENT 'Dojo Front',
+    `Agent_Command` text NOT NULL DEFAULT 0 COMMENT 'Agent Room',
+    `Agent_Solo` text NOT NULL DEFAULT 0 COMMENT 'Agent Solo',
+    `Pizza` text NOT NULL DEFAULT 0 COMMENT 'Pizza Parlor',
+    `Beach` text NOT NULL DEFAULT 0 COMMENT 'Beach',
+    `Lighthouse` text NOT NULL DEFAULT 0 COMMENT 'Light House',
+    `Beacon` text NOT NULL DEFAULT 0 COMMENT 'Beacon',
+    `Migrator` text NOT NULL DEFAULT 0 COMMENT 'Migrator',
+    `Ship_Hold` text NOT NULL DEFAULT 0 COMMENT 'Ship Hold',
+    `Quarters` text NOT NULL DEFAULT 0 COMMENT 'Quarters',
+    `Crow_Nest` text NOT NULL DEFAULT 0 COMMENT 'Crow Nest',
+    `Dock` text NOT NULL DEFAULT 0 COMMENT 'Dock',
+    `Snow_Forts` text NOT NULL DEFAULT 0 COMMENT 'Snow Forts',
+    `Stadium` text NOT NULL DEFAULT 0 COMMENT 'Stadium',
+    `HQ` text NOT NULL DEFAULT 0 COMMENT 'HQ',
+    `Boiler` text NOT NULL DEFAULT 0 COMMENT 'Boiler',
+    `Iceberg` text NOT NULL DEFAULT 0 COMMENT 'Iceberg',
+    `Pool` text NOT NULL DEFAULT 0 COMMENT 'Pool',
+    `Mine_Shack` text NOT NULL DEFAULT 0 COMMENT 'Mine Shack',
+    `Mine` text NOT NULL DEFAULT 0 COMMENT 'Mine',
+    `Forest` text NOT NULL DEFAULT 0 COMMENT 'Forest',
+    `Cove` text NOT NULL DEFAULT 0 COMMENT 'Cove',
+    `???` text NOT NULL DEFAULT 0 COMMENT '???',
+    `Fire_Dojo` text NOT NULL DEFAULT 0 COMMENT 'Fire Dojo',
+    `Water_Dojo` text NOT NULL DEFAULT 0 COMMENT 'Water Dojo',
+    `Snow_Dojo` text NOT NULL DEFAULT 0 COMMENT 'Snow Dojo',
+    `Lake` text NOT NULL DEFAULT 0 COMMENT 'Lake',
+    `Underwater` text NOT NULL DEFAULT 0 COMMENT 'Underwater',
+    `Astro_Barrier` text NOT NULL DEFAULT 0 COMMENT 'Astro Barrier',
+    `Bean_Counters` text NOT NULL DEFAULT 0 COMMENT 'Bean Counters',
+    PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1 COMMENT='Rooms';
+
+INSERT INTO `Rooms` (`ID`) VALUES
+(1)
