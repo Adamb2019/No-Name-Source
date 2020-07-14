@@ -14,15 +14,16 @@ class inventory {
             inventory.push(items)
           })
         }
-        return resolve(inventory.join('%'))
+        let newInventory = [...new Set(inventory)] // removes duplicates
+        return resolve(newInventory.join('%'))
       })
     })
   }
 
   sendInventory(client) {
-    this.getInventory(client).then(inventory => {
-      if(inventory) {
-        return client.send_xt('gi', -1, inventory)
+    this.getInventory(client).then(newInventory => {
+      if(newInventory) {
+        return client.send_xt('gi', -1, newInventory)
       }
     })
   }
